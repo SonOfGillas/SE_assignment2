@@ -12,17 +12,17 @@ class Task {
             timeElapsed = 0;
         }
 
-    virtual void tick() = 0;
+        virtual void tick() = 0;
 
-    bool updateAndCheckTime(int basePeriod) {
-        timeElapsed += basePeriod;
-        if (timeElapsed >= myPeriod) {
-            timeElapsed = 0;
-            return true;
-        } else {
-            return false;
+        bool updateAndCheckTime(int basePeriod) {
+            timeElapsed += basePeriod;
+            if (timeElapsed >= myPeriod) {
+                timeElapsed = 0;
+                return true;
+            } else {
+                return false;
+            }
         }
-    }
 };
 
 #endif

@@ -5,17 +5,15 @@
 #include <Servo.h>
 
 class ServoMotorImpl: public ServoMotor {
+    private:
+        int pin; 
+        Servo motor;
 
-public:
-  ServoMotorImpl(int pin);
-
-  void on();
-  void setPosition(int angle);
-  void off();
-    
-private:
-  int pin; 
-  Servo motor; 
+    public:
+        ServoMotorImpl(int pin);
+        void on();
+        void setPosition(int angle);
+        void off();
 };
 
 #endif
