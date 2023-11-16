@@ -3,7 +3,7 @@
 
 class MovementDetector {
     public:
-        virtual void detected() = 0;
+        virtual bool isMotionDetected() = 0;
 };
 
 #endif
