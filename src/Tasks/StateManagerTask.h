@@ -4,8 +4,10 @@
 #include <Task.h>
 
 class StateManagerTask : public Task {
+    protected:
+        State* state;
     public:
-        StateManagerTask(int pin, int priority);
+        StateManagerTask(State* initalState);
         void init(int period);
         void tick();
 };
