@@ -1,6 +1,9 @@
 #ifndef __SCREEN__
 #define __SCREEN__
 
+#include <Wire.h>
+#include <LiquidCrystal_I2C.h> 
+
 class LcdScreen {
     private:
         /* Wiring: SDA => A4, SCL => A5 */

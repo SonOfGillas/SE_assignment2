@@ -1,4 +1,5 @@
 #include <Arduino.h>
+#include <Wire.h>
 #include <Scheduler.h>
 #include "State/State.h"
 
