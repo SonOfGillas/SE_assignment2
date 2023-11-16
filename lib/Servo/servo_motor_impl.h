@@ -6,7 +6,7 @@
 
 class ServoMotorImpl: public ServoMotor {
     private:
-        int pin; 
+        int pin;
         Servo motor;
 
     public:
