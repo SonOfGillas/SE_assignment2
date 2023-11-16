@@ -5,6 +5,8 @@
 #include "../State.h"
 
 class StateIdle: public State {
+    private:
+        static void wakeup(){};
     public:
         StateIdle();
         bool goNext();

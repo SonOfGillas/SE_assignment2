@@ -1,6 +1,8 @@
 #ifndef __LIGHT__
 #define __LIGHT__
 
+#include "../model.h"
+
 class State {
     public:
         StateName name;
