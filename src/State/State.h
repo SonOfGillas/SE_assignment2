@@ -1,8 +1,6 @@
 #ifndef __LIGHT__
 #define __LIGHT__
 
-enum class StateName { Idle };
-
 class State {
     public:
         StateName name;

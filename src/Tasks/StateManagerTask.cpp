@@ -1,5 +1,7 @@
 #include <Arduino.h>
+#include "model.h"
 #include "State/State.h"
+#include "State/StateIdle/StateIdle.h"
 #include "StateManagerTask.h"
 
 StateManagerTask::StateManagerTask(State* state) {
@@ -15,8 +17,8 @@ void StateManagerTask::tick() {
         // TODO: check if is possible to use typeof instead of StateName
         switch (state->name)
         {
-        case StateName::Idle:
-            /* code */
+        case StateName::CarExited:
+            state = new StateIdle();
             break;
         default:
             break;
