@@ -1,18 +1,21 @@
 #include <Arduino.h>
+#include <Scheduler.h>
+#include "State/State.h"
 
-// put function declarations here:
-int myFunction(int, int);
+Scheduler sched;
+State state;
 
 void setup() {
-    // put your setup code here, to run once:
-    int result = myFunction(2, 3);
+  sched.init(50);
+
+  /*
+  Task* t0 = new BlinkTask(2);
+  t0->init(500);
+  sched.addTask(t0);
+  */
 }
 
 void loop() {
-    // put your main code here, to run repeatedly:
+ sched.schedule();
 }
 
-// put function definitions here:
-int myFunction(int x, int y) {
-    return x + y;
-}
