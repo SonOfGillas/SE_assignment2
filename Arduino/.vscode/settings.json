@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "lcdscreen.h": "c",
+        "servo_motor_impl.h": "c",
+        "sonar.h": "c"
+    }
+}

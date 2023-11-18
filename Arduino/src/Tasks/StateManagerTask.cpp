@@ -5,7 +5,9 @@
 #include "StateManagerTask.h"
 
 StateManagerTask::StateManagerTask(State* state) {
-    this->state = state;
+    //TODO check if is better to remove this property and use the global variable
+    //or this reference is already connected to the global variable
+    this->state = state; 
 }
 
 void StateManagerTask::init(int period) {
