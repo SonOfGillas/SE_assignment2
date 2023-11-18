@@ -15,4 +15,5 @@ class LedExt: public LightExt, public Led {
         void switchOff();
         void setIntensity(int v);
 };
+
 #endif

@@ -3,16 +3,16 @@
 #include "model.h"
 #include "StateIdle.h"
 
-void wakeup() {}
+StateName StateIdle::name() {
+    return StateName::Idle;
+}
 
 StateIdle::StateIdle() {
-    this->name = StateName::Idle;
     enableInterrupt(PIN_PIR, this->wakeup, RISING);
     set_sleep_mode(SLEEP_MODE_PWR_DOWN);
     sleep_mode();
 }
 
-bool StateIdle::goNext(){
+bool StateIdle::goNext() {
     return true;
 }
-

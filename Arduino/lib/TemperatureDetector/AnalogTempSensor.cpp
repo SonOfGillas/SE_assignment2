@@ -7,17 +7,17 @@ AnalogTempSensor::AnalogTempSensor(int pin) {
     pinMode(pin,INPUT);
 }
 
-double AnalogTempSensor::getTemperature(){
-  int value = analogRead(A2);
-  
-  /* value : 1023 = value_in_mV : 5000 */
-  /* value_in_mV = 5000/1023 * value */
-  
-  int value_in_mV = 4.8876 * value; 
+double AnalogTempSensor::getTemperature() {
+    int value = analogRead(A2);
 
-  /* value_in_C = value_in_mV / 10 (since we have 10 mV => 1 °C ) */
+    /* value : 1023 = value_in_mV : 5000 */
+    /* value_in_mV = 5000/1023 * value */
 
-  double value_in_C = value_in_mV * 0.1;
+    int value_in_mV = 4.8876 * value;
 
-  return value_in_C;
+    /* value_in_C = value_in_mV / 10 (since we have 10 mV => 1 °C ) */
+
+    double value_in_C = value_in_mV * 0.1;
+
+    return value_in_C;
 };

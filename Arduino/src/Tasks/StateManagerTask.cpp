@@ -17,19 +17,18 @@ void StateManagerTask::init(int period) {
 void StateManagerTask::tick() {
    if(state->goNext()){
         // TODO: check if is possible to use typeof instead of StateName
-        switch (state->name)
-        {
-        case StateName::CarExited:
-            state = new StateIdle();
-            break;
-        default:
-            break;
+        switch (state->name()) {
+            case StateName::CarExited:
+                delete state;
+                state = new StateIdle();
+                break;
+            default:
+                break;
         }
-   }
+    }
 }
 
-
 /*
-Idele manda in sleep l'arduino nel costruttore ma prima attacca
+Idle manda in sleep l'arduino nel costruttore ma prima attacca
 un interrupt al pir che lo risveglia
 */
