@@ -3,7 +3,7 @@
 
 volatile bool timerFlag;
 
-ISR(TIMER1_COMPA_vect) {
+ISR(TIMER2_COMPA_vect) {
     timerFlag = true;
 }
 

@@ -15,7 +15,7 @@ class State {
         */
         virtual bool goNext() = 0;
 
-        virtual ~State() = 0;
+        virtual ~State() = default;
 };
 
 #endif

@@ -7,7 +7,7 @@
 #include <LcdScreen.h>
 #include <Led.h>
 #include <Pir.h>
-#include <Servo_motor_impl.h>
+#include <servo_motor_impl.h>
 
 Components::Components() {
    this->l1 = new Led(PIN_L1);
