@@ -1,7 +1,7 @@
 #ifndef _COMPONENTS_
 #define _COMPONENTS_
 
-#include <Button.h>
+#include <ButtonImpl.h>
 #include <Sonar.h>
 #include <LcdScreen.h>
 #include <Led.h>
@@ -9,7 +9,6 @@
 #include <Servo_motor_impl.h>
 
 #include "model.h"
-
 
 class Components {
     public:

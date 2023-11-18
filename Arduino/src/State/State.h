@@ -1,5 +1,5 @@
-#ifndef __LIGHT__
-#define __LIGHT__
+#ifndef __STATE__
+#define __STATE__
 
 #include "../model.h"
 

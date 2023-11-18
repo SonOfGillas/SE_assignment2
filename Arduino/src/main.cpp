@@ -20,9 +20,11 @@ void setup() {
   t0->init(500);
   sched.addTask(t0);
   */
- 
+
   state = new StateIdle();
   Task* stateManagerTask = new StateManagerTask(state);
+  stateManagerTask->init(100);
+  sched->addTask(stateManagerTask);
 }
 
 void loop() {
