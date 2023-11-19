@@ -16,3 +16,7 @@ StateIdle::StateIdle() {
 bool StateIdle::goNext() {
     return true;
 }
+
+StateIdle::~StateIdle() {
+    disableInterrupt(PIN_PIR);
+}
