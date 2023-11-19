@@ -1,8 +1,9 @@
 #include <Arduino.h>
 #include <Wire.h>
 #include <Scheduler.h>
+#include <Config.h>
 #include "State/State.h"
-#include "Components.h"
+#include "Components/Components.h"
 #include "Tasks/StateManagerTask.h"
 #include "State/StateIdle/StateIdle.h"
 

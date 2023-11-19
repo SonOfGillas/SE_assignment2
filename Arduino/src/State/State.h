@@ -1,7 +1,7 @@
 #ifndef __STATE__
 #define __STATE__
 
-#include "../model.h"
+#include "States.h"
 
 class State {
     public:

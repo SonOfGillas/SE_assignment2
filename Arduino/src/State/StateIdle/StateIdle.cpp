@@ -1,6 +1,6 @@
 #include <EnableInterrupt.h>
 #include <avr/sleep.h>
-#include "model.h"
+#include <Config.h>
 #include "StateIdle.h"
 
 StateName StateIdle::name() {

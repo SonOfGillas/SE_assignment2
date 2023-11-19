@@ -1,11 +1,10 @@
 #include <Arduino.h>
-#include "model.h"
 #include "State/State.h"
 #include "StateManagerTask.h"
 #include "State/StateIdle/StateIdle.h"
 #include "State/StateWelcome/StateWelcome.h"
 
-StateManagerTask::StateManagerTask(State* state,Components* components) {
+StateManagerTask::StateManagerTask(State* state, Components* components) {
     //TODO check if is better to remove this property and use the global variable
     //or this reference is already connected to the global variable
     this->state = state; 
@@ -17,18 +16,20 @@ void StateManagerTask::init(int period) {
 }
 
 void StateManagerTask::tick() {
-   if(state->goNext()){
-        // TODO: check if is possible to use typeof instead of StateName
-        switch (state->name()) {
+   if(state->goNext()) {
+        StateName name = state->name();
+        delete state;
+        switch (name) {
             case StateName::CarExited:
-                delete state;
                 state = new StateIdle();
                 break;
             case StateName::Idle:
-                delete state;
                 state = new StateWelcome(this->components);
                 break;
             default:
+                // TODO: evaluate if the undefined/unknown/default state
+                //       should reset the CPU or switch to StateIdle
+                state = new StateIdle();
                 break;
         }
     }

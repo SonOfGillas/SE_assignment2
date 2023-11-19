@@ -8,8 +8,6 @@
 #include <Pir.h>
 #include <servo_motor_impl.h>
 
-#include "model.h"
-
 class Components {
     public:
         Components();
