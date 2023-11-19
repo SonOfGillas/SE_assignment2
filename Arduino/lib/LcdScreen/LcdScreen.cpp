@@ -13,3 +13,7 @@ void LcdScreen::setCursor(int x, int y) {
 void LcdScreen::print(char* text) {
     this->lcd.print(text);
 }
+
+void LcdScreen::clear() {
+    this->lcd.clear();
+}

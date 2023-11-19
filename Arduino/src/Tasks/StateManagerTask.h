@@ -2,12 +2,14 @@
 #define __STATE_MANAGER_TASK__
 
 #include <Task.h>
+#include "Components.h"
 
 class StateManagerTask : public Task {
     protected:
         State* state;
+        Components* components;
     public:
-        StateManagerTask(State* initalState);
+        StateManagerTask(State* initalState,Components* components);
         void init(int period);
         void tick();
 };

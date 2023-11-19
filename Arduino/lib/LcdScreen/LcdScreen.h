@@ -13,6 +13,7 @@ class LcdScreen {
         LcdScreen();
         void setCursor(int, int);
         void print(char* text);
+        void clear();
 };
 
 #endif

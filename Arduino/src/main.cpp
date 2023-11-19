@@ -22,7 +22,7 @@ void setup() {
     */
 
     state = new StateIdle();
-    Task* stateManagerTask = new StateManagerTask(state);
+    Task* stateManagerTask = new StateManagerTask(state,components);
     stateManagerTask->init(100);
     sched->addTask(stateManagerTask);
 }

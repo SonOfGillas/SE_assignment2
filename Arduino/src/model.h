@@ -10,7 +10,9 @@
 #define PIN_SONAR_ECHO 8
 #define PIN_SERVO 9
 
+#define N1 5 //seconds in the waiting area
 
-enum StateName { Idle, CarExited };
+
+enum StateName { Idle, Welcome, CarExited };
 
 #endif
