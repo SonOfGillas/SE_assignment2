@@ -8,6 +8,7 @@ class StateIdle: public State {
         static void wakeup() {};
     public:
         StateIdle();
+        ~StateIdle();
         StateName name();
         bool goNext();
 };
