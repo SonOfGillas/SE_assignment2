@@ -44,5 +44,6 @@ void StateEnteringWashingArea::carInWashingArea(bool isCarInWashingArea){
 }
 
 StateEnteringWashingArea::~StateEnteringWashingArea(){
-    //TODO: delete tasks detectCarInWashingArea and blinckTask
+    scheduler->removeLastTask(); // remove blink task
+    scheduler->removeLastTask(); // remove detect car task
 }

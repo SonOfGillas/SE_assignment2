@@ -16,6 +16,15 @@ bool Scheduler::addTask(Task* task) {
     }
 }
 
+bool Scheduler::removeLastTask() {
+    if (nTasks > 0) {
+        nTasks--;
+        return true;
+    } else {
+        return false;
+    }
+}
+
 void Scheduler::schedule() {
     timer.waitForNextTick();
     for (int i = 0; i < nTasks; i++) {
