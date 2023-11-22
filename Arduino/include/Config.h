@@ -13,4 +13,6 @@
 #define N1 5    //seconds in the waiting area
 #define N2 3    //seconds in the washing area
 
+#define MINDIST 0.2  //minimum distance(Meter) to detect a car in the washing area
+
 #endif

@@ -3,6 +3,5 @@
         "lcdscreen.h": "c",
         "servo_motor_impl.h": "c",
         "sonar.h": "c",
-        "state.h": "c"
     }
 }

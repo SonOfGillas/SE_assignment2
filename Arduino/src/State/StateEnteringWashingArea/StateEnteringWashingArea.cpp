@@ -14,7 +14,7 @@ StateEnteringWashingArea::StateEnteringWashingArea(Components* components, Sched
 
     this->components->userLcd->clear();
     this->components->userLcd->setCursor(0, 0); 
-    this->components->userLcd->print("Welcome");
+    this->components->userLcd->print("Procede to the Washing Area");
     
     this->enteredTime = 0;
 
@@ -29,7 +29,7 @@ bool StateEnteringWashingArea::goNext(){
         : false;
 }
 
-void StateEnteringWashingArea::setCarInWashingArea(bool isCarInWashingArea){
+void StateEnteringWashingArea::carInWashingArea(bool isCarInWashingArea){
     if(this->isCarInWashingArea == false && isCarInWashingArea == true){
         this->enteredTime = millis();
     }

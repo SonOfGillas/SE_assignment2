@@ -4,8 +4,8 @@
 #include <Scheduler.h>
 #include "State/State.h"
 #include "Components/Components.h"
-
-class StateEnteringWashingArea: public State {
+#include "Tasks/DetectCarInWashingArea/CarInWashingAreaListener.h"
+class StateEnteringWashingArea: public State, public CarInWashingAreaListener {
     private:
         Components* components;
         Scheduler* scheduler;
@@ -16,7 +16,7 @@ class StateEnteringWashingArea: public State {
         ~StateEnteringWashingArea();
         StateName name();
         bool goNext();
-        void setCarInWashingArea(bool isCarInWashingArea);
+        void carInWashingArea(bool isCarInWashingArea);
 };
 
 #endif
