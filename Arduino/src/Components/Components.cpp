@@ -8,6 +8,7 @@
 #include <Led.h>
 #include <Pir.h>
 #include <servo_motor_impl.h>
+#include <AnalogTempSensor.h>
 
 Components::Components() {
     this->l1 = new Led(PIN_L1);
@@ -18,6 +19,7 @@ Components::Components() {
     this->gate = new ServoMotorImpl(PIN_SERVO);
     this->userLcd = new LcdScreen();
     this->carPresenceDetector = new Pir(PIN_PIR);   
+    this->tempSensor = new AnalogTempSensor(PIN_TEMP_SENSOR);
 
     while (this->carPresenceDetector->isCalibrationFinished() == false){};
 }

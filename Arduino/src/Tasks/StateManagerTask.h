@@ -11,6 +11,7 @@ class StateManagerTask : public Task {
         State* state;
         Components* components;
         Scheduler* scheduler;
+        State* stateFactory(StateName stateName);
     public:
         StateManagerTask(State* initalState,Components* components,Scheduler* scheduler);
         void init(int period);

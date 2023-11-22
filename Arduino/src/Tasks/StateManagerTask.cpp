@@ -5,6 +5,7 @@
 #include "State/StateIdle/StateIdle.h"
 #include "State/StateWelcome/StateWelcome.h"
 #include "State/StateEnteringWashingArea/StateEnteringWashingArea.h"
+#include "State/StateError/StateError.h"
 
 StateManagerTask::StateManagerTask(State* state, Components* components, Scheduler* scheduler) {
     //TODO check if is better to remove this property and use the global variable
@@ -24,24 +25,42 @@ void StateManagerTask::tick() {
         delete state;
         switch (name) {
             case StateName::CarExited:
-                state = new StateIdle();
+                state = stateFactory(StateName::Idle);
                 break;
             case StateName::Idle:
-                state = new StateWelcome(this->components);
+                state = stateFactory(StateName::Welcome);
                 break;
             case StateName::Welcome:
-                state = new StateEnteringWashingArea(this->components, this->scheduler);
+                state = stateFactory(StateName::EnteringWashingArea);
+                break;
+            case StateName::Error:
+                StateError* stateError = (StateError*) state;
+                state = stateFactory(stateError->previousStateName);
                 break;
             default:
                 // TODO: evaluate if the undefined/unknown/default state
                 //       should reset the CPU or switch to StateIdle
-                state = new StateIdle();
+                state = stateFactory(StateName::Idle);
                 break;
         }
     }
 }
 
-/*
-Idle manda in sleep l'arduino nel costruttore ma prima attacca
-un interrupt al pir che lo risveglia
-*/
+
+State* StateManagerTask::stateFactory(StateName stateName) {
+    return new StateIdle();
+        switch (stateName) {
+        case StateName::Idle:
+            return new StateIdle();
+        case StateName::Welcome:
+            return new StateWelcome(this->components);
+        case StateName::EnteringWashingArea:
+            return new StateEnteringWashingArea(this->components, this->scheduler);
+        case StateName::Error:
+            return new StateError(this->state->name());
+        default:
+            return new StateIdle();   
+    }
+    
+}
+

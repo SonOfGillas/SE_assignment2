@@ -7,6 +7,7 @@
 #include <Led.h>
 #include <Pir.h>
 #include <servo_motor_impl.h>
+#include <AnalogTempSensor.h>
 
 class Components {
     public:
@@ -19,6 +20,7 @@ class Components {
         ServoMotorImpl* gate;
         LcdScreen* userLcd;
         Pir* carPresenceDetector;
+        AnalogTempSensor* tempSensor;
 };
 
 #endif

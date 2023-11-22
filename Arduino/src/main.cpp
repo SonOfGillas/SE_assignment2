@@ -16,16 +16,12 @@ void setup() {
     sched = new Scheduler();
     sched->init(100); //GCD of all tasks
 
-    /*
-    Task* t0 = new BlinkTask(2);
-    t0->init(500);
-    sched.addTask(t0);
-    */
-
     state = new StateIdle();
     Task* stateManagerTask = new StateManagerTask(state,components,sched);
     stateManagerTask->init(100);
     sched->addTask(stateManagerTask);
+
+    //TODO: add task consoleDashboard
 }
 
 void loop() {
