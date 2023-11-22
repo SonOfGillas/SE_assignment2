@@ -6,8 +6,11 @@
 #include "State/State.h"
 
 class ConsoleDashboard: public Task {
-    State* state;
-    TemperatureDetector* temperatureDetector;
+    private:
+        State* state;
+        TemperatureDetector* temperatureDetector;
+        bool isMaxTempDetected;
+        long maxTempDetectedTime;
     public:
         ConsoleDashboard(State* state, TemperatureDetector* temperatureDetector);  
         void init(int period);  

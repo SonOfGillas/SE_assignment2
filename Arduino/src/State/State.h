@@ -3,7 +3,9 @@
 
 #include "States.h"
 
-class State {
+class State {        
+    private:
+        bool error = false;
     public:
         /*
         Return the StateName associated to the State
@@ -16,6 +18,13 @@ class State {
         virtual bool goNext() = 0;
 
         virtual ~State() = default;
+
+        bool hasError(){
+            return this->error;
+        }
+        void setError(){
+            this->error = true;
+        }
 };
 
 #endif

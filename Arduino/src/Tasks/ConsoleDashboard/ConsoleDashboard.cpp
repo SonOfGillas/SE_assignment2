@@ -1,3 +1,5 @@
+#include <Arduino.h>
+#include <Config.h>
 #include "ConsoleDashboard.h"
 #include "MsgService.h"
 #include "State/State.h"
@@ -6,6 +8,8 @@
 ConsoleDashboard::ConsoleDashboard(State* state,TemperatureDetector* temperatureDetector){
     MsgService.init();
     this->temperatureDetector = temperatureDetector;
+    this->isMaxTempDetected = false;
+    this->maxTempDetectedTime = 0;
 }
 
 void ConsoleDashboard::init(int period){
@@ -27,4 +31,17 @@ void ConsoleDashboard::tick(){
         MsgService.sendMsg("app data"); //TODO: send current state name, temperature and number of cars washed
     }
 
+    if(this->temperatureDetector->getTemperature() > MAXTEMP){
+        if(this->isMaxTempDetected == false){
+            this->isMaxTempDetected = true;
+            this->maxTempDetectedTime = millis();
+        } else {
+            if(millis() - this->maxTempDetectedTime > N4*1000){
+                MsgService.sendMsg("ERROR"); //TODO: send error message
+                state->setError();
+            }
+        }
+    } else {
+        this->isMaxTempDetected = false;
+    }
 }

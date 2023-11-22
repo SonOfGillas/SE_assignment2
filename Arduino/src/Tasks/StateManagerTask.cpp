@@ -20,33 +20,40 @@ void StateManagerTask::init(int period) {
 }
 
 void StateManagerTask::tick() {
-   if(state->goNext()) {
-        StateName name = state->name();
+   if(state->hasError()) {
+        State* newState = stateFactory(StateName::Error);
         delete state;
-        switch (name) {
+        state = newState; 
+   }
+   if(state->goNext()) {
+        StateName currentState = state->name();
+        State* newState;
+        switch (currentState) {
             case StateName::CarExited:
-                state = stateFactory(StateName::Idle);
+                newState = stateFactory(StateName::Idle);
                 break;
             case StateName::Idle:
-                state = stateFactory(StateName::Welcome);
+                newState = stateFactory(StateName::Welcome);
                 break;
             case StateName::Welcome:
-                state = stateFactory(StateName::EnteringWashingArea);
+                newState = stateFactory(StateName::EnteringWashingArea);
                 break;
             case StateName::Error:
                 StateError* stateError = (StateError*) state;
-                state = stateFactory(stateError->previousStateName);
+                newState = stateFactory(stateError->previousStateName);
                 break;
             default:
                 // TODO: evaluate if the undefined/unknown/default state
                 //       should reset the CPU or switch to StateIdle
-                state = stateFactory(StateName::Idle);
+                newState = stateFactory(StateName::Idle);
                 break;
         }
+        delete state;
+        state = newState;
     }
 }
 
-
+/* this function need the current state for generate the StateError*/
 State* StateManagerTask::stateFactory(StateName stateName) {
     return new StateIdle();
         switch (stateName) {
