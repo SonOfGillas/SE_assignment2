@@ -1,7 +1,7 @@
 #ifndef __STATE_WELCOME__
 #define __STATE_WELCOME__
 
-#include "Components.h"
+#include "Components/Components.h"
 #include "../State.h"
 
 class StateWelcome: public State {

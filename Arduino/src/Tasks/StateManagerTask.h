@@ -2,7 +2,7 @@
 #define __STATE_MANAGER_TASK__
 
 #include <Task.h>
-#include "Components.h"
+#include "Components/Components.h"
 
 class StateManagerTask : public Task {
     protected:

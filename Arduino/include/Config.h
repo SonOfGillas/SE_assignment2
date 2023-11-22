@@ -1,5 +1,5 @@
-#ifndef _MODEL_
-#define _MODEL_
+#ifndef __CONFIG__
+#define __CONFIG__
 
 #define PIN_PIR 2
 #define PIN_L1 3
@@ -10,9 +10,6 @@
 #define PIN_SONAR_ECHO 8
 #define PIN_SERVO 9
 
-#define N1 5 //seconds in the waiting area
-
-
-enum StateName { Idle, Welcome, CarExited };
+#define N1 5    //seconds in the waiting area
 
 #endif

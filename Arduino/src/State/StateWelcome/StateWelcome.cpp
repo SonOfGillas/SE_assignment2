@@ -1,6 +1,6 @@
 #include <Arduino.h>
-#include "Components.h"
-#include "model.h"
+#include <Config.h>
+#include "Components/Components.h"
 #include "StateWelcome.h"
 
 StateName StateWelcome::name() {
