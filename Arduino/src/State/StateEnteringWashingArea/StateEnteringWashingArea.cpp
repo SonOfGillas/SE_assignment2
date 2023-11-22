@@ -3,6 +3,8 @@
 #include <Config.h>
 #include "StateEnteringWashingArea.h"
 #include "Components/Components.h"
+#include "Tasks/DetectCarInWashingArea/DetectCarInWashingArea.h"
+#include "Tasks/BlinkLed/BlinkLed.h"
 
 StateName StateEnteringWashingArea::name() {
     return StateName::EnteringWashingArea;
@@ -18,8 +20,13 @@ StateEnteringWashingArea::StateEnteringWashingArea(Components* components, Sched
     
     this->enteredTime = 0;
 
-    //TODO: add fade led task
-    //TODO: add sonar task
+    Task* detectCarInWashingArea = new DetectCarInWashingArea(this->components, this);
+    detectCarInWashingArea->init(300);
+    this->scheduler->addTask(detectCarInWashingArea);
+
+    Task* blinkTask = new BlinkLed(this->components->l2);
+    blinkTask->init(100);
+    this->scheduler->addTask(blinkTask);
 }
 
 bool StateEnteringWashingArea::goNext(){
@@ -36,4 +43,6 @@ void StateEnteringWashingArea::carInWashingArea(bool isCarInWashingArea){
     this->isCarInWashingArea = isCarInWashingArea;
 }
 
-StateEnteringWashingArea::~StateEnteringWashingArea(){}
+StateEnteringWashingArea::~StateEnteringWashingArea(){
+    //TODO: delete tasks detectCarInWashingArea and blinckTask
+}

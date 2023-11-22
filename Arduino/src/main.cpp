@@ -14,7 +14,7 @@ Components* components;
 void setup() {
     components = new Components();
     sched = new Scheduler();
-    sched->init(50);
+    sched->init(100); //GCD of all tasks
 
     /*
     Task* t0 = new BlinkTask(2);
