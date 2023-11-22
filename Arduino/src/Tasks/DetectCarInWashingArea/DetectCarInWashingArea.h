@@ -3,13 +3,13 @@
 
 #include <Task.h>
 #include <Components/Components.h>
-#include <DistanceDetector.h>
+#include <Sonar.h>
 #include "CarInWashingAreaListener.h"
 
 
 class DetectCarInWashingArea : public Task {
     private:
-        DistanceDetector* movementDetector;
+        Sonar* sonar;
         CarInWashingAreaListener* listener;
         bool isCarInWashingArea;
     public:
