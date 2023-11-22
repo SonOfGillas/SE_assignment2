@@ -8,8 +8,9 @@ class StateManagerTask : public Task {
     protected:
         State* state;
         Components* components;
+        Scheduler* scheduler;
     public:
-        StateManagerTask(State* initalState,Components* components);
+        StateManagerTask(State* initalState,Components* components,Scheduler* scheduler);
         void init(int period);
         void tick();
 };

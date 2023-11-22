@@ -11,5 +11,6 @@
 #define PIN_SERVO 9
 
 #define N1 5    //seconds in the waiting area
+#define N2 3    //seconds in the washing area
 
 #endif
