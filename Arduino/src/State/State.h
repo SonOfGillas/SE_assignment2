@@ -6,6 +6,7 @@
 class State {        
     private:
         bool error = false;
+        int carWashed;
     public:
         /*
         Return the StateName associated to the State
@@ -19,11 +20,18 @@ class State {
 
         virtual ~State() = default;
 
+        State(int carWashed){
+            this->carWashed = carWashed;
+        };
+
         bool hasError(){
             return this->error;
         }
         void setError(){
             this->error = true;
+        }
+        int getCarWashed(){
+            return carWashed;
         }
 };
 

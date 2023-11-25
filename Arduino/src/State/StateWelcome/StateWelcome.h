@@ -9,7 +9,7 @@ class StateWelcome: public State {
         Components* components;
         long arrivalTime;
     public:
-        StateWelcome(Components* components);
+        StateWelcome(int carWashed, Components* components);
         ~StateWelcome();
         StateName name();
         bool goNext();

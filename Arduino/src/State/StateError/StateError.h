@@ -7,7 +7,7 @@ class StateError: public State {
     private:
         bool maintenanceDone;
     public:
-        StateError(StateName previousStateName);
+        StateError(int carWashed, StateName previousStateName);
         StateName name();
         bool goNext();
         void setMaintenanceDone();

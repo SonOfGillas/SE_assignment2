@@ -53,16 +53,17 @@ void StateManagerTask::tick() {
 
 /* this function need the current state for generate the StateError*/
 State* StateManagerTask::stateFactory(StateName stateName) {
+    int carWashed = state->getCarWashed();
     switch (stateName) {
         case StateName::Idle:
-            return new StateIdle(this->scheduler);
+            return new StateIdle(carWashed,this->scheduler);
         case StateName::Welcome:
-            return new StateWelcome(this->components);
+            return new StateWelcome(carWashed,this->components);
         case StateName::EnteringWashingArea:
-            return new StateEnteringWashingArea(this->components, this->scheduler);
+            return new StateEnteringWashingArea(carWashed,this->components, this->scheduler);
         case StateName::Error:
         default:
-            return new StateError(this->state->name());  
+            return new StateError(carWashed,this->state->name());  
     }
     
 }

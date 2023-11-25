@@ -9,7 +9,7 @@ class StateIdle: public State {
         static void wakeup() {};
         Scheduler* scheduler;
     public:
-        StateIdle(Scheduler* scheduler);
+        StateIdle(int carWashed, Scheduler* scheduler);
         ~StateIdle();
         StateName name();
         bool goNext();

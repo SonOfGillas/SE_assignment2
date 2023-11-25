@@ -5,7 +5,7 @@ StateName StateError::name() {
     return StateName::Error;
 }
 
-StateError::StateError(StateName previousStateName){
+StateError::StateError(int carWashed,StateName previousStateName):State(carWashed){
     this->previousStateName = previousStateName;
     this->maintenanceDone = false;
 }

@@ -7,7 +7,7 @@ StateName StateWelcome::name() {
     return StateName::Welcome;
 }
 
-StateWelcome::StateWelcome(Components* components) {
+StateWelcome::StateWelcome(int carWashed, Components* components):State(carWashed) {
     this->components = components;
     this->arrivalTime = millis();
     this->components->userLcd->setCursor(0, 0); 

@@ -9,7 +9,7 @@ StateName StateIdle::name() {
     return StateName::Idle;
 }
 
-StateIdle::StateIdle(Scheduler* scheduler) {
+StateIdle::StateIdle(int carWashed,Scheduler* scheduler):State(carWashed) {
     this->scheduler = scheduler;
     enableInterrupt(PIN_PIR, this->wakeup, RISING);
 

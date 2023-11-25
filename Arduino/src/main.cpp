@@ -17,7 +17,7 @@ void setup() {
     sched = new Scheduler();
     sched->init(100); //GCD of all tasks
 
-    state = new StateIdle(sched);
+    state = new StateIdle(0,sched);
     Task* stateManagerTask = new StateManagerTask(state,components,sched);
     stateManagerTask->init(100);
     sched->addTask(stateManagerTask);

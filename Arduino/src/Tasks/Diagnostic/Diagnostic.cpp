@@ -18,6 +18,7 @@ void Diagnostic::init(int period){
 
 void Diagnostic::tick(){
     StateName curretState = state->name();
+    double temp = this->temperatureDetector->getTemperature();
     if(curretState == StateName::Error){
        if (MsgService.isMsgAvailable()) {
             Msg* msg = MsgService.receiveMsg();
@@ -28,10 +29,21 @@ void Diagnostic::tick(){
             delete msg;
         }
     } else {
-        MsgService.sendMsg("app data"); //TODO: send current state name, temperature and number of cars washed
+        String state = "state idle";
+
+        String openingTag = "{";
+        String carWashedTag = "\"CarWashed\":";
+        String carWashedData = "\""+String(this->state->getCarWashed())+"\"";
+        String washingMachineStateTag = "\"WashingMachineState\":";
+        String washingMachineStateData = "\""+state+"\"";
+        String temperature = "\"Temperature\":";
+        String temperatureData = "\"" + String(temp, 4) + "C°\"";
+        String closingTag = "}";
+
+        MsgService.sendMsg("{\"CarWashed\":\"0\",\"WashingMachineState\":\"idle\",\"Temperature\":\"0\",}");
     }
 
-    if(this->temperatureDetector->getTemperature() > MAXTEMP){
+    if(temp > MAXTEMP){
         if(this->isMaxTempDetected == false){
             this->isMaxTempDetected = true;
             this->maxTempDetectedTime = millis();

@@ -10,7 +10,7 @@ StateName StateEnteringWashingArea::name() {
     return StateName::EnteringWashingArea;
 }
 
-StateEnteringWashingArea::StateEnteringWashingArea(Components* components, Scheduler* scheduler) {
+StateEnteringWashingArea::StateEnteringWashingArea(int carWashed,Components* components, Scheduler* scheduler):State(carWashed){
     this->components = components;
     this->scheduler = scheduler;
 
