@@ -69,7 +69,7 @@
                   <Font size="14.0" />
                </font>
             </Label>
-                <Button mnemonicParsing="false" onMouseClicked="#onStartGamePressed" styleClass="buttonMenu" stylesheets="@../css/application.css" text="Mantenance Done" />
+                <Button mnemonicParsing="false" onMouseClicked="#onMantencanceDone" styleClass="buttonMenu" stylesheets="@../css/application.css" text="Mantenance Done" />
          </children>
       </VBox>
    </right>

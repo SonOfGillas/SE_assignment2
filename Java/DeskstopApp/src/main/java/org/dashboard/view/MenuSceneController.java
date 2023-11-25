@@ -3,6 +3,7 @@ package org.dashboard.view;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -15,21 +16,25 @@ public class MenuSceneController extends AbstractController{
     @FXML
     private BorderPane root;
 
+    @FXML private Label CarWashed;
+    @FXML private Label WashingMachineState;
+    @FXML private Label Temperature;
+
     
     /**
      * {@inheritDoc}
      */
     @Override
-    public void initialize() {}
+    public void initialize() {
+        //TODO inizialize Dashboard manager
+    }
     
     /**
      * {@inheritDoc}
      */
     @FXML
-    public void onStartGamePressed(final MouseEvent event) {
-        
-        this.primaryStage = (Stage)root.getScene().getWindow();
-        super.setDimension(this.primaryStage.getScene().getWidth(), this.primaryStage.getScene().getHeight());
+    public void onMantencanceDone(final MouseEvent event) {
+
     }
     
     
