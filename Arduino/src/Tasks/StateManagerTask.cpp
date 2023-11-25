@@ -39,14 +39,12 @@ void StateManagerTask::tick() {
                 newState = stateFactory(StateName::EnteringWashingArea);
                 break;
             case StateName::Error:
+            default:
                 StateError* stateError = (StateError*) state;
                 newState = stateFactory(stateError->previousStateName);
                 break;
-            default:
                 // TODO: evaluate if the undefined/unknown/default state
                 //       should reset the CPU or switch to StateIdle
-                newState = stateFactory(StateName::Idle);
-                break;
         }
         delete state;
         state = newState;
@@ -55,18 +53,16 @@ void StateManagerTask::tick() {
 
 /* this function need the current state for generate the StateError*/
 State* StateManagerTask::stateFactory(StateName stateName) {
-    return new StateIdle();
-        switch (stateName) {
+    switch (stateName) {
         case StateName::Idle:
-            return new StateIdle();
+            return new StateIdle(this->scheduler);
         case StateName::Welcome:
             return new StateWelcome(this->components);
         case StateName::EnteringWashingArea:
             return new StateEnteringWashingArea(this->components, this->scheduler);
         case StateName::Error:
-            return new StateError(this->state->name());
         default:
-            return new StateIdle();   
+            return new StateError(this->state->name());  
     }
     
 }
