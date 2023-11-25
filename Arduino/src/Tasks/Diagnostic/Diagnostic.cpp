@@ -29,18 +29,21 @@ void Diagnostic::tick(){
             delete msg;
         }
     } else {
-        String state = "state idle";
+        String state = "idle";
 
         String openingTag = "{";
         String carWashedTag = "\"CarWashed\":";
-        String carWashedData = "\""+String(this->state->getCarWashed())+"\"";
+        String carWashedData = "\""+String(this->state->getCarWashed())+"\",";
         String washingMachineStateTag = "\"WashingMachineState\":";
-        String washingMachineStateData = "\""+state+"\"";
-        String temperature = "\"Temperature\":";
-        String temperatureData = "\"" + String(temp, 4) + "C°\"";
+        String washingMachineStateData = "\""+state+"\",";
+        String temperatureTag = "\"Temperature\":";
+        String temperatureData = "\"" + String(temp, 4) + "C°\",";
         String closingTag = "}";
 
-        MsgService.sendMsg("{\"CarWashed\":\"0\",\"WashingMachineState\":\"idle\",\"Temperature\":\"0\",}");
+        //message exemple: "{\"CarWashed\":\"0\",\"WashingMachineState\":\"idle\",\"Temperature\":\"0\",}"
+        String msg = openingTag + carWashedTag + carWashedData + washingMachineStateTag + washingMachineStateData + temperatureTag + temperatureData + closingTag;
+        
+        MsgService.sendMsg(msg);
     }
 
     if(temp > MAXTEMP){
