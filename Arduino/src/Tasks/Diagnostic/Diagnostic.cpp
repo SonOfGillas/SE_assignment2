@@ -22,14 +22,14 @@ void Diagnostic::tick(){
     if(curretState == StateName::Error){
        if (MsgService.isMsgAvailable()) {
             Msg* msg = MsgService.receiveMsg();
-            if (msg->getContent() == "Maintenance done"){
+            if (msg->getContent() == "MantainenceDone"){
                 StateError* stateError = (StateError*) state;
                 stateError->setMaintenanceDone();
             }
             delete msg;
         }
     } else {
-        String state = "idle";
+        String state = "idle"; //TODO: add here the name of the current state, maybe the name can be taken from a map using the state name
 
         String openingTag = "{";
         String carWashedTag = "\"CarWashed\":";

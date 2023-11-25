@@ -7,6 +7,8 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import org.dashboard.model.DashboardManager;
+import org.dashboard.model.UpdateView;
 
 public class MenuSceneController extends AbstractController{
     
@@ -19,7 +21,6 @@ public class MenuSceneController extends AbstractController{
     @FXML private Label CarWashed;
     @FXML private Label WashingMachineState;
     @FXML private Label Temperature;
-
     
     /**
      * {@inheritDoc}
@@ -27,6 +28,7 @@ public class MenuSceneController extends AbstractController{
     @Override
     public void initialize() {
         //TODO inizialize Dashboard manager
+        //new DashboardManager();
     }
     
     /**

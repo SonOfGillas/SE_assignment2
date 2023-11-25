@@ -1,33 +1,58 @@
 package org.dashboard.model;
 
-import com.google.gson.Gson;
+import org.json.simple.*;
+import org.json.simple.parser.JSONParser;
+import jssc.CommChannel;
+import jssc.SerialCommChannel;
 
 public class DashboardManager {
     private final UpdateView updateView;
-    private final Mantainence mantainence;
+    private  boolean  mantainence = false;
     private boolean error = false;
-    private int CarWashed;
+    private String CarWashed;
     private String WashingMachineState;
-    private  float Temperature;
+    private String Temperature;
 
 
-    public DashboardManager(UpdateView updateView, Mantainence mantainence) {
+    public DashboardManager(UpdateView updateView) {
         this.updateView = updateView;
-        this.mantainence = mantainence;
         dashboardLoop();
     }
+
+    public void setMantainenceDone(){
+        this.mantainence = true;
+    }
+
     private void dashboardLoop(){
-        Gson gson = new Gson();
+        try {
+            CommChannel channel = new SerialCommChannel("COM3",9600);
+            JSONParser parser = new JSONParser();
 
-        /*
-        Foo foo = new Foo(1,"first");
-        String jsonStr = gson.toJson(foo);
-        Foo result = gson.fromJson(jsonStr, Foo.class);
-        assertEquals(foo.getId(),result.getId
-        */
+            System.out.println("Waiting Arduino for rebooting...");
+            Thread.sleep(4000);
+            System.out.println("Ready.");
 
-        while (true){
-
+            while (true){
+                if(error){
+                    if(mantainence){
+                        System.out.println("Send: MantainenceDone");
+                        channel.sendMsg("MantainenceDone");
+                        mantainence = false;
+                        error = false;
+                    }
+                } else {
+                    String msg = channel.receiveMsg();
+                    System.out.println("Received: "+msg);
+                    JSONObject json = (JSONObject) parser.parse(msg);
+                    this.CarWashed = (String) json.get("CarWashed");
+                    this.WashingMachineState = (String) json.get("WashingMachineState");
+                    this.Temperature = (String) json.get("Temperature");
+                    this.updateView.update();
+                }
+                Thread.sleep(500);
+            }
+        } catch (Exception e){
+            System.out.println(e.toString());
         }
     }
 
@@ -35,7 +60,7 @@ public class DashboardManager {
         return error;
     }
 
-    public int getCarWashed() {
+    public String getCarWashed() {
         return CarWashed;
     }
 
@@ -43,7 +68,7 @@ public class DashboardManager {
         return WashingMachineState;
     }
 
-    public float getTemperature() {
+    public String getTemperature() {
         return Temperature;
     }
 
