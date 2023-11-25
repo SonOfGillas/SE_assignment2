@@ -1,22 +1,22 @@
 #include <Arduino.h>
 #include <Config.h>
-#include "ConsoleDashboard.h"
+#include "Diagnostic.h"
 #include "MsgService.h"
 #include "State/State.h"
 #include "State/StateError/StateError.h"
 
-ConsoleDashboard::ConsoleDashboard(State* state,TemperatureDetector* temperatureDetector){
+Diagnostic::Diagnostic(State* state,TemperatureDetector* temperatureDetector){
     MsgService.init();
     this->temperatureDetector = temperatureDetector;
     this->isMaxTempDetected = false;
     this->maxTempDetectedTime = 0;
 }
 
-void ConsoleDashboard::init(int period){
+void Diagnostic::init(int period){
     Task::init(period);
 }
 
-void ConsoleDashboard::tick(){
+void Diagnostic::tick(){
     StateName curretState = state->name();
     if(curretState == StateName::Error){
        if (MsgService.isMsgAvailable()) {

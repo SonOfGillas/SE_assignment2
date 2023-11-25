@@ -5,7 +5,7 @@
 #include "State/State.h"
 #include "Components/Components.h"
 #include "Tasks/StateManagerTask.h"
-#include "Tasks/ConsoleDashboard/ConsoleDashboard.h"
+#include "Tasks/Diagnostic/Diagnostic.h"
 #include "State/StateIdle/StateIdle.h"
 
 Scheduler* sched;
@@ -22,9 +22,9 @@ void setup() {
     stateManagerTask->init(100);
     sched->addTask(stateManagerTask);
 
-    Task* consoleDashboard = new ConsoleDashboard(state,components->tempSensor);
-    consoleDashboard->init(500);
-    sched->addTask(consoleDashboard);
+    Task* diagnosticTask = new Diagnostic(state,components->tempSensor);
+    diagnosticTask->init(500);
+    sched->addTask(diagnosticTask);
 }
 
 void loop() {
