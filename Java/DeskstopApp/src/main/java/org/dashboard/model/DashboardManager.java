@@ -56,7 +56,7 @@ public class DashboardManager {
         }
     }
 
-    public boolean isError() {
+    public boolean errorDetected() {
         return error;
     }
 

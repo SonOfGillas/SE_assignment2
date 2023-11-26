@@ -13,12 +13,12 @@
             <children>
             <HBox alignment="CENTER" prefHeight="35.0" prefWidth="600.0">
                <children>
-                      <Label alignment="CENTER" styleClass="textStyle" stylesheets="@../css/application.css" text="Car Washed:  ">
+                      <Label  alignment="CENTER" styleClass="textStyle" stylesheets="@../css/application.css" text="Car Washed:  ">
                           <font>
                               <Font size="18.0" />
                           </font>
                       </Label>
-                  <Label text="0">
+                  <Label fx:id="CarWashed" text="0">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -32,7 +32,7 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <Label text="Idle">
+                  <Label fx:id="WashingMachineState" text="Unknown">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -46,7 +46,7 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <Label text="0">
+                  <Label fx:id="Temperature" text="0">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -57,7 +57,7 @@
         </VBox>
     </center>
    <right>
-      <VBox alignment="CENTER" prefHeight="400.0" prefWidth="143.0" BorderPane.alignment="CENTER">
+      <VBox fx:id="errorConsole" alignment="CENTER" prefHeight="400.0" prefWidth="143.0" BorderPane.alignment="CENTER">
          <children>
             <Label text=" Maintenance" textFill="RED">
                <font>

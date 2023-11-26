@@ -11,8 +11,9 @@ public class Main {
     public static void main(String[] args) throws Exception {
         System.out.println("Program Started!");
 
-        //Application.launch(MainApplication.class, args);
+        Application.launch(MainApplication.class, args);
 
+        /*
         CommChannel channel = new SerialCommChannel("COM3",9600);
 
         System.out.println("Waiting Arduino for rebooting...");
@@ -26,5 +27,7 @@ public class Main {
             System.out.println("Received: "+msg);
             Thread.sleep(500);
         }
+
+         */
     }
 }
