@@ -1,4 +1,5 @@
 #include "Scheduler.h"
+#include <Arduino.h>
 
 void Scheduler::init(int basePeriod) {
     this->basePeriod = basePeriod;
