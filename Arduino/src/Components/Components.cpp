@@ -7,7 +7,7 @@
 #include <LcdScreen.h>
 #include <Led.h>
 #include <Pir.h>
-#include <servo_motor_impl.h>
+#include <Servo_motor_impl.h>
 #include <AnalogTempSensor.h>
 
 Components::Components() {

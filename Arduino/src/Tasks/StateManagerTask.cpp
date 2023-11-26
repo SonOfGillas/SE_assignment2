@@ -67,4 +67,3 @@ State* StateManagerTask::stateFactory(StateName stateName) {
     }
     
 }
-
