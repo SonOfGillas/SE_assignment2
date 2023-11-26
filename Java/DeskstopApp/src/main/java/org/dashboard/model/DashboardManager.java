@@ -16,7 +16,8 @@ public class DashboardManager {
 
     public DashboardManager(UpdateView updateView) {
         this.updateView = updateView;
-        dashboardLoop();
+        Thread newThread = new Thread(this::dashboardLoop);
+        newThread.start();
     }
 
     public void setMantainenceDone(){
@@ -33,6 +34,23 @@ public class DashboardManager {
             System.out.println("Ready.");
 
             while (true){
+                System.out.println("Request Data");
+                channel.sendMsg("RequestData");
+                String msg = channel.receiveMsg();
+                System.out.println("Received: "+msg);
+                try {
+                    JSONObject json = (JSONObject) parser.parse(msg);
+                    this.CarWashed = (String) json.get("CarWashed");
+                    this.WashingMachineState = (String) json.get("WashingMachineState");
+                    this.Temperature = (String) json.get("Temperature");
+                    if(this.WashingMachineState.equals("Error") && !this.error){
+                        this.error = true;
+                        this.mantainence = false;
+                    }
+                    javafx.application.Platform.runLater(this.updateView::update);
+                } catch (Exception e){
+                    System.out.println("Parsing Message Error");
+                }
                 if(error){
                     if(mantainence){
                         System.out.println("Send: MantainenceDone");
@@ -40,17 +58,10 @@ public class DashboardManager {
                         mantainence = false;
                         error = false;
                     }
-                } else {
-                    String msg = channel.receiveMsg();
-                    System.out.println("Received: "+msg);
-                    JSONObject json = (JSONObject) parser.parse(msg);
-                    this.CarWashed = (String) json.get("CarWashed");
-                    this.WashingMachineState = (String) json.get("WashingMachineState");
-                    this.Temperature = (String) json.get("Temperature");
-                    this.updateView.update();
                 }
                 Thread.sleep(500);
             }
+
         } catch (Exception e){
             System.out.println(e.toString());
         }
