@@ -18,7 +18,7 @@
                               <Font size="18.0" />
                           </font>
                       </Label>
-                  <Label fx:id="CarWashed" text="0">
+                  <Label fx:id="CarWashed" text="Unknown">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -46,7 +46,7 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <Label fx:id="Temperature" text="0">
+                  <Label fx:id="Temperature" text="Unknown">
                      <font>
                         <Font size="18.0" />
                      </font>

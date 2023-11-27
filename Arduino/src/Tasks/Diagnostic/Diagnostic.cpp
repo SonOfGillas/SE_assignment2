@@ -5,8 +5,7 @@
 #include "State/State.h"
 #include "State/StateError/StateError.h"
 
-Diagnostic::Diagnostic(State* state,TemperatureDetector* temperatureDetector){
-    MsgService.init();
+Diagnostic::Diagnostic(State* state,TemperatureDetector* temperatureDetector):Task(){
     this->temperatureDetector = temperatureDetector;
     this->isMaxTempDetected = false;
     this->maxTempDetectedTime = 0;
@@ -17,19 +16,19 @@ void Diagnostic::init(int period){
 }
 
 void Diagnostic::tick(){
-    StateName curretState = state->name();
-    double temp = this->temperatureDetector->getTemperature();
-
-    /*
-        if (MsgService.isMsgAvailable()){
+    //StateName curretState = state->name();
+    //double temp = this->temperatureDetector->getTemperature();
+    
+    if (MsgService.isMsgAvailable()){
         Msg* msg = MsgService.receiveMsg();    
         if(msg->getContent()=="RequestData"){
-               delay(500);
-            MsgService.sendMsg("{\"CarWashed\":\"0\",\"WashingMachineState\":\"Error\",\"Temperature\":\"0\",}");
+            MsgService.sendMsg("{\"CarWashed\":\"0\",\"WashingMachineState\":\"Idle\",\"Temperature\":\"0\",}");
         }
         delete msg;
-        }
-    */
+    }
+    
+
+   /*
     if(MsgService.isMsgAvailable()){
         Msg* msg = MsgService.receiveMsg();
         String msgContent = msg->getContent();
@@ -57,6 +56,7 @@ void Diagnostic::tick(){
         }
         delete msg;
     }
+    */
 
     
     /*
@@ -66,7 +66,6 @@ void Diagnostic::tick(){
             this->maxTempDetectedTime = millis();
         } else {
             if(millis() - this->maxTempDetectedTime > N4*1000){
-                MsgService.sendMsg("ERROR"); //TODO: send error message
                 state->setError();
             }
         }
