@@ -6,27 +6,28 @@
 #include "State/StateError/StateError.h"
 
 Diagnostic::Diagnostic(State* state,TemperatureDetector* temperatureDetector):Task(){
+    this->state = state;
     this->temperatureDetector = temperatureDetector;
     this->isMaxTempDetected = false;
     this->maxTempDetectedTime = 0;
 }
 
 void Diagnostic::init(int period){
+    //Serial.begin(9600);
     Task::init(period);
 }
 
 void Diagnostic::tick(){
-    //StateName curretState = state->name();
-    //double temp = this->temperatureDetector->getTemperature();
-    
+    StateName curretState = this->state->name();
+    double temp = this->temperatureDetector->getTemperature();
+
     if (MsgService.isMsgAvailable()){
         Msg* msg = MsgService.receiveMsg();    
         if(msg->getContent()=="RequestData"){
             MsgService.sendMsg("{\"CarWashed\":\"0\",\"WashingMachineState\":\"Idle\",\"Temperature\":\"0\",}");
         }
         delete msg;
-    }
-    
+        }
 
    /*
     if(MsgService.isMsgAvailable()){
