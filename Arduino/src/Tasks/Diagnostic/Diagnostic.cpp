@@ -21,28 +21,19 @@ void Diagnostic::tick(){
     StateName curretState = this->state->name();
     double temp = this->temperatureDetector->getTemperature();
 
-    if (MsgService.isMsgAvailable()){
-        Msg* msg = MsgService.receiveMsg();    
-        if(msg->getContent()=="RequestData"){
-            MsgService.sendMsg("{\"CarWashed\":\"0\",\"WashingMachineState\":\"Idle\",\"Temperature\":\"0\",}");
-        }
-        delete msg;
-        }
-
-   /*
     if(MsgService.isMsgAvailable()){
         Msg* msg = MsgService.receiveMsg();
         String msgContent = msg->getContent();
         if(msgContent == "RequestData"){
-            String state = "idle"; //TODO: add here the name of the current state, maybe the name can be taken from a map using the state name
+            String stateNameString = getStateNameString(curretState);
 
             String openingTag = "{";
             String carWashedTag = "\"CarWashed\":";
             String carWashedData = "\""+String(this->state->getCarWashed())+"\",";
             String washingMachineStateTag = "\"WashingMachineState\":";
-            String washingMachineStateData = "\""+state+"\",";
+            String washingMachineStateData = "\""+stateNameString+"\",";
             String temperatureTag = "\"Temperature\":";
-            String temperatureData = "\"" + String(temp, 4) + "C°\",";
+            String temperatureData = "\"" + String(temp, 1) + "C°\",";
             String closingTag = "}";
 
             //message exemple: "{\"CarWashed\":\"0\",\"WashingMachineState\":\"idle\",\"Temperature\":\"0\",}"
@@ -57,11 +48,9 @@ void Diagnostic::tick(){
         }
         delete msg;
     }
-    */
 
-    
-    /*
-        if(temp > MAXTEMP){
+
+    if(temp > MAXTEMP){
         if(this->isMaxTempDetected == false){
             this->isMaxTempDetected = true;
             this->maxTempDetectedTime = millis();
@@ -73,7 +62,5 @@ void Diagnostic::tick(){
     } else {
         this->isMaxTempDetected = false;
     }
-    */
 
-    
 }
