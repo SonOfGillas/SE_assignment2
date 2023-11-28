@@ -5,11 +5,14 @@
 #include "StateIdle.h"
 #include "Tasks/Sleep/Sleep.h"
 
+bool isWakeup;
+
 StateName StateIdle::name() {
     return StateName::Idle;
 }
 
 StateIdle::StateIdle(int carWashed,Scheduler* scheduler):State(carWashed) {
+    isWakeup = false;
     this->scheduler = scheduler;
     enableInterrupt(PIN_PIR, this->wakeup, RISING);
 
@@ -21,7 +24,7 @@ StateIdle::StateIdle(int carWashed,Scheduler* scheduler):State(carWashed) {
 }
 
 bool StateIdle::goNext() {
-    return true;
+    return isWakeup;
 }
 
 StateIdle::~StateIdle() {

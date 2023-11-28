@@ -13,7 +13,6 @@ Diagnostic::Diagnostic(State* state,TemperatureDetector* temperatureDetector):Ta
 }
 
 void Diagnostic::init(int period){
-    //Serial.begin(9600);
     Task::init(period);
 }
 
@@ -49,14 +48,13 @@ void Diagnostic::tick(){
         delete msg;
     }
 
-
     if(temp > MAXTEMP){
         if(this->isMaxTempDetected == false){
             this->isMaxTempDetected = true;
             this->maxTempDetectedTime = millis();
         } else {
             if(millis() - this->maxTempDetectedTime > N4*1000){
-                state->setError();
+                this->state->setError();
             }
         }
     } else {
