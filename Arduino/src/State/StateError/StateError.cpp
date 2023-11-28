@@ -11,7 +11,7 @@ StateError::StateError(int carWashed,StateName previousStateName):State(carWashe
 }
 
 bool StateError::goNext(){
-    return maintenanceDone;
+    return this->maintenanceDone;
 }
 
 void StateError::setMaintenanceDone(){

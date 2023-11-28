@@ -17,20 +17,21 @@ bool Scheduler::addTask(Task* task) {
     }
 }
 
-bool Scheduler::removeLastTask() {
-    if (nTasks > 0) {
-        nTasks--;
-        return true;
-    } else {
-        return false;
-    }
-}
-
 void Scheduler::schedule() {
     timer.waitForNextTick();
     for (int i = 0; i < nTasks; i++) {
         if (taskList[i]->updateAndCheckTime(basePeriod)) {
             taskList[i]->tick();
         }
+    }
+}
+
+bool Scheduler::removeLastTask() {
+     if (nTasks > 0) {
+            delete taskList[nTasks];
+            nTasks--;
+            return true;
+        } else {
+            return false;
     }
 }

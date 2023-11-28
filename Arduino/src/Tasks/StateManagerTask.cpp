@@ -8,8 +8,6 @@
 #include "State/StateError/StateError.h"
 
 StateManagerTask::StateManagerTask(State* state, Components* components, Scheduler* scheduler) {
-    //TODO check if is better to remove this property and use the global variable
-    //or this reference is already connected to the global variable
     this->state = state; 
     this->components = components;
     this->scheduler = scheduler;
@@ -20,13 +18,13 @@ void StateManagerTask::init(int period) {
 }
 
 void StateManagerTask::tick() {
-   if(state->hasError()) {
-        State* newState = stateFactory(StateName::Error);
-        delete state;
-        state = newState; 
+    if(this->state->name() != StateName::Error &&  this->state->hasError()) {
+        State* newState = stateFactory(StateName::Error);;
+        delete this->state;
+        this->state = newState; 
    }
-   if(state->goNext()) {
-        StateName currentState = state->name();
+    if(this->state->goNext()) {
+        StateName currentState = this->state->name();
         State* newState;
         switch (currentState) {
             case StateName::CarExited:
@@ -40,20 +38,20 @@ void StateManagerTask::tick() {
                 break;
             case StateName::Error:
             default:
+                // TODO: evaluate if the undefined/unknown/default state
+                //       should reset the CPU or switch to StateIdle
                 StateError* stateError = (StateError*) state;
                 newState = stateFactory(stateError->previousStateName);
                 break;
-                // TODO: evaluate if the undefined/unknown/default state
-                //       should reset the CPU or switch to StateIdle
         }
-        delete state;
-        state = newState;
+        delete this->state;
+        this->state = newState;
     }
 }
 
 /* this function need the current state for generate the StateError*/
 State* StateManagerTask::stateFactory(StateName stateName) {
-    int carWashed = state->getCarWashed();
+    int carWashed = this->state->getCarWashed();
     switch (stateName) {
         case StateName::Idle:
             return new StateIdle(carWashed,this->scheduler);
@@ -65,5 +63,4 @@ State* StateManagerTask::stateFactory(StateName stateName) {
         default:
             return new StateError(carWashed,this->state->name());  
     }
-    
 }

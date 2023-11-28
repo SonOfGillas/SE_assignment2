@@ -60,5 +60,4 @@ void Diagnostic::tick(){
     } else {
         this->isMaxTempDetected = false;
     }
-
 }
