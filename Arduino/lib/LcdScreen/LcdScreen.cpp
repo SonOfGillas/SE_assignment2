@@ -10,7 +10,7 @@ void LcdScreen::setCursor(int x, int y) {
     this->lcd.setCursor(x,y);
 }
 
-void LcdScreen::print(char* text) {
+void LcdScreen::print(const char* text) {
     this->lcd.print(text);
 }
 

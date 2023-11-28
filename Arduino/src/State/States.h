@@ -3,7 +3,8 @@
 
 #include "Arduino.h"
 
-enum StateName { Error, Idle, Welcome, EnteringWashingArea, CarExited };
+enum StateName { Error, Idle, Welcome, EnteringWashingArea, ReadyToWash,
+                 Washing, ExitingWashingArea, CarExited };
 
 String getStateNameString(StateName stateName);
 

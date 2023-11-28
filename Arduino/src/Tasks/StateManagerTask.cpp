@@ -6,6 +6,7 @@
 #include "State/StateWelcome/StateWelcome.h"
 #include "State/StateEnteringWashingArea/StateEnteringWashingArea.h"
 #include "State/StateError/StateError.h"
+#include "State/StateReadyToWash/StateReadyToWash.h"
 
 StateManagerTask::StateManagerTask(State* state, Components* components, Scheduler* scheduler) {
     this->state = state; 
@@ -22,7 +23,7 @@ void StateManagerTask::tick() {
         State* newState = stateFactory(StateName::Error);;
         delete this->state;
         this->state = newState; 
-   }
+    }
     if(this->state->goNext()) {
         StateName currentState = this->state->name();
         State* newState;
@@ -35,6 +36,18 @@ void StateManagerTask::tick() {
                 break;
             case StateName::Welcome:
                 newState = stateFactory(StateName::EnteringWashingArea);
+                break;
+            case StateName::EnteringWashingArea:
+                newState = stateFactory(StateName::ReadyToWash);
+                break;
+            case StateName::ReadyToWash:
+                newState = stateFactory(StateName::Washing);
+                break;
+            case StateName::Washing:
+                newState = stateFactory(StateName::ExitingWashingArea);
+                break;
+            case StateName::ExitingWashingArea:
+                newState = stateFactory(StateName::CarExited);
                 break;
             case StateName::Error:
             default:
@@ -59,6 +72,14 @@ State* StateManagerTask::stateFactory(StateName stateName) {
             return new StateWelcome(carWashed,this->components);
         case StateName::EnteringWashingArea:
             return new StateEnteringWashingArea(carWashed,this->components, this->scheduler);
+        case StateName::ReadyToWash:
+            return new StateReadyToWash(carWashed, this->components, this->scheduler);
+        // case StateName::Washing:
+        //     return new StateWashing();
+        // case StateName::ExitingWashingArea:
+        //     return new StateExitingWashingArea();
+        // case StateName::CarExited:
+        //     return new StateCarExited();
         case StateName::Error:
         default:
             return new StateError(carWashed,this->state->name());  

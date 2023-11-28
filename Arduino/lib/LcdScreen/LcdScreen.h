@@ -12,7 +12,7 @@ class LcdScreen {
     public:
         LcdScreen();
         void setCursor(int, int);
-        void print(char* text);
+        void print(const char* text);
         void clear();
 };
 
