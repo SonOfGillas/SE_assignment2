@@ -13,14 +13,6 @@ StateName StateIdle::name() {
 
 StateIdle::StateIdle(int carWashed,Scheduler* scheduler):State(carWashed) {
     isWakeup = false;
-    this->scheduler = scheduler;
-    enableInterrupt(PIN_PIR, this->wakeup, RISING);
-
-    //if the system turns off instantly the Diagnostic
-    //task will not be able to send the current state
-    Task* sleepTask = new Sleep();
-    sleepTask->init(500);
-    this->scheduler->addTask(sleepTask);
 }
 
 bool StateIdle::goNext() {
@@ -28,6 +20,5 @@ bool StateIdle::goNext() {
 }
 
 StateIdle::~StateIdle() {
-    disableInterrupt(PIN_PIR);
-    this->scheduler->removeLastTask();
+   
 }

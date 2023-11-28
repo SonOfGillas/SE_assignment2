@@ -8,6 +8,7 @@
 #include "Tasks/Diagnostic/Diagnostic.h"
 #include "State/StateIdle/StateIdle.h"
 #include "MsgService.h"
+#include "State/StateError/StateError.h"
 
 Scheduler* sched;
 State* state;

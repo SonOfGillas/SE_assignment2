@@ -9,11 +9,10 @@
 class Scheduler {
     private:
         int basePeriod;
-        int nTasks;
         Task* taskList[MAX_TASKS];
         Timer timer;
-
     public:
+        int nTasks;
         void init(int basePeriod);
         virtual bool addTask(Task* task);
         virtual void schedule();
