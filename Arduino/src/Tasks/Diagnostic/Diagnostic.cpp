@@ -18,7 +18,7 @@ void Diagnostic::init(int period){
 }
 
 void Diagnostic::tick(){
-    StateName curretState = this->stateManager->getCurrentState()->name();
+    StateName curretState = this->stateManager->getCurrentState();
     double temp = this->temperatureDetector->getTemperature();
 
     if(MsgService.isMsgAvailable()){
@@ -29,7 +29,7 @@ void Diagnostic::tick(){
 
             String openingTag = "{";
             String carWashedTag = "\"CarWashed\":";
-            String carWashedData = "\""+String(this->stateManager->getCurrentState()->getCarWashed())+"\",";
+            String carWashedData = "\""+String(0)+"\","; //TODO: get car washed
             String washingMachineStateTag = "\"WashingMachineState\":";
             String washingMachineStateData = "\""+stateNameString+"\",";
             String temperatureTag = "\"Temperature\":";
