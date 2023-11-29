@@ -12,7 +12,6 @@ class StateReadyToWash: public State, public ButtonListener {
         Components* components;
         Scheduler* scheduler;
         bool isButtonPressed;
-        long enteredTime;
     public:
         StateReadyToWash(int carWashed, Components* components, Scheduler* scheduler);
         ~StateReadyToWash();

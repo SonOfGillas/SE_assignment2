@@ -6,7 +6,7 @@
 #include "Tasks/WatchButton/WatchButton.h"
 
 StateName StateReadyToWash::name() {
-    return StateName::EnteringWashingArea;
+    return StateName::ReadyToWash;
 }
 
 StateReadyToWash::StateReadyToWash(int carWashed, Components* components, Scheduler* scheduler): State(carWashed) {
