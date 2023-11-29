@@ -5,15 +5,13 @@
 #include <Task.h>
 #include "Components/Components.h"
 #include "State/State.h"
+#include "State/StateManager.h"
 
 class StateManagerTask : public Task {
     protected:
-        State* state;
-        Components* components;
-        Scheduler* scheduler;
-        State* stateFactory(StateName stateName);
+        StateManager* stateManager;
     public:
-        StateManagerTask(State* initalState,Components* components,Scheduler* scheduler);
+        StateManagerTask(StateManager* StateManager);
         void init(int period);
         void tick();
 };

@@ -13,7 +13,12 @@ StateManager::StateManager(Components* components, Scheduler* scheduler) {
     this->state = new StateIdle(0,scheduler);
 }
 
-void StateManager::goNext(){
+void StateManager::switchState(){
+    if(this->state->name() != StateName::Error &&  this->state->hasError()) {
+        State* newState = stateFactory(StateName::Error);
+        delete this->state;
+        this->state = newState; 
+    }
     if(this->state->goNext()) {
         StateName currentState = this->state->name();
         State* newState;
@@ -53,11 +58,15 @@ void StateManager::goNext(){
 }
 
 void StateManager::setError(bool error){
-        if(this->state->name() != StateName::Error &&  this->state->hasError()) {
-        State* newState = stateFactory(StateName::Error);;
-        delete this->state;
-        this->state = newState; 
+    if(error){
+        this->state->setError();
+    } else {
+        if(this->state->name() == StateName::Error) {
+            StateError* stateError = (StateError*) this->state;
+            stateError->setMaintenanceDone();
+        }
     }
+
 }
 
 StateName StateManager::getCurrentState(){

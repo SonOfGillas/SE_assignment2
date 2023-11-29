@@ -15,7 +15,7 @@ private:
     State* stateFactory(StateName stateName);
 public:
     StateManager(Components* components, Scheduler* scheduler);
-    void goNext();
+    void switchState();
     void setError(bool error);
     StateName getCurrentState();
 };
