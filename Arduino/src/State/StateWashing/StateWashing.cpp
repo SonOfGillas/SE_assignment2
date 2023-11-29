@@ -4,6 +4,7 @@
 #include "StateWashing.h"
 #include "Components/Components.h"
 #include "StateWashing.h"
+#include "Tasks/LcdCountdown/LcdCountdown.h"
 
 StateName StateWashing::name() {
     return StateName::ReadyToWash;
@@ -21,6 +22,9 @@ StateWashing::StateWashing(int carWashed, Components* components, Scheduler* sch
     this->components->userLcd->print("Washing");
     
     // display countdown N3
+    Task* lcdCountdown = new LcdCountdown(components->userLcd, this);
+    lcdCountdown->init(500);
+    this->scheduler->addTask(lcdCountdown);
 }
 
 bool StateWashing::goNext() {
@@ -37,5 +41,5 @@ unsigned long StateWashing::getRemainingTime() {
 }
 
 StateWashing::~StateWashing() {
-    scheduler->removeLastTask(); // remove watch task
+    scheduler->removeLastTask(); // remove lcd countdown
 }
