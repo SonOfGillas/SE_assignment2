@@ -1,4 +1,5 @@
 {
+    "C_Cpp.errorSquiggles": "disabled",
     "files.associations": {
         "lcdscreen.h": "c",
         "servo_motor_impl.h": "c",
