@@ -6,8 +6,8 @@ LcdScreen::LcdScreen(){
     this->lcd.backlight();
 }
 
-void LcdScreen::setCursor(int x, int y) {
-    this->lcd.setCursor(x,y);
+void LcdScreen::setCursor(int col, int row) {
+    this->lcd.setCursor(col, row);
 }
 
 void LcdScreen::print(const char* text) {
