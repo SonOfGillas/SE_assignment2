@@ -3,10 +3,11 @@
 #include "Diagnostic.h"
 #include "MsgService.h"
 #include "State/State.h"
+#include "State/StateManager.h"
 #include "State/StateError/StateError.h"
 
-Diagnostic::Diagnostic(State* state,TemperatureDetector* temperatureDetector):Task(){
-    this->state = state;
+Diagnostic::Diagnostic(StateManager* stateManager,TemperatureDetector* temperatureDetector):Task(){
+    this->stateManager = stateManager;
     this->temperatureDetector = temperatureDetector;
     this->isMaxTempDetected = false;
     this->maxTempDetectedTime = 0;
@@ -17,7 +18,7 @@ void Diagnostic::init(int period){
 }
 
 void Diagnostic::tick(){
-    StateName curretState = this->state->name();
+    StateName curretState = this->stateManager->getCurrentState()->name();
     double temp = this->temperatureDetector->getTemperature();
 
     if(MsgService.isMsgAvailable()){
@@ -28,7 +29,7 @@ void Diagnostic::tick(){
 
             String openingTag = "{";
             String carWashedTag = "\"CarWashed\":";
-            String carWashedData = "\""+String(this->state->getCarWashed())+"\",";
+            String carWashedData = "\""+String(this->stateManager->getCurrentState()->getCarWashed())+"\",";
             String washingMachineStateTag = "\"WashingMachineState\":";
             String washingMachineStateData = "\""+stateNameString+"\",";
             String temperatureTag = "\"Temperature\":";
@@ -41,8 +42,7 @@ void Diagnostic::tick(){
             MsgService.sendMsg(msg);
         } else if(msgContent == "MantainenceDone"){
             if(curretState == StateName::Error){
-                StateError* stateError = (StateError*) state;
-                stateError->setMaintenanceDone();
+                this->stateManager->setError(false);
             }
         }
         delete msg;
@@ -54,7 +54,7 @@ void Diagnostic::tick(){
             this->maxTempDetectedTime = millis();
         } else {
             if(millis() - this->maxTempDetectedTime > N4*1000){
-                this->state->setError();
+                this->stateManager->setError(true);
             }
         }
     } else {
