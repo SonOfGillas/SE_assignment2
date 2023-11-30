@@ -35,14 +35,4 @@ void setup() {
 
 void loop() {
    sched->schedule();
-   /*
-       if(MsgService.isMsgAvailable()){
-        Msg* msg = MsgService.receiveMsg();
-        String msgContent = msg->getContent();
-        if(msgContent == "RequestData"){
-            MsgService.sendMsg("{\"CarWashed\":\"0\",\"WashingMachineState\":\"idle\",\"Temperature\":\"0\",}");
-        }
-        delete msg;
-    }
-   */
 }

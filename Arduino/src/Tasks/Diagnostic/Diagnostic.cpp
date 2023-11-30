@@ -42,6 +42,8 @@ void Diagnostic::tick(){
             MsgService.sendMsg(msg);
         } else if(msgContent == "MantainenceDone"){
             if(curretState == StateName::Error){
+                maxTempDetectedTime=0;
+                this->isMaxTempDetected = false;
                 this->stateManager->setError(false);
             }
         }
