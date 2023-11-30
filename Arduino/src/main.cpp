@@ -21,7 +21,6 @@ void setup() {
     sched = new Scheduler();
     sched->init(100); //GCD of all tasks
 
-    Serial.println("Starting");
     stateManager = new StateManager(components,sched);
 
     Task* stateManagerTask = new StateManagerTask(stateManager);

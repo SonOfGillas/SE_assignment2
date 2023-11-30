@@ -4,7 +4,7 @@
 #include "Arduino.h"
 
 enum StateName { Initial, Error, Idle, Welcome, EnteringWashingArea, ReadyToWash,
-                 Washing, ExitingWashingArea, CarExited };
+                 Washing, ExitingWashingArea };
 
 String getStateNameString(StateName stateName);
 

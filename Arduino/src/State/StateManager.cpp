@@ -6,6 +6,7 @@
 #include "State/StateError/StateError.h"
 #include "State/StateReadyToWash/StateReadyToWash.h"
 #include "State/StateInitial/StateInitial.h"
+#include "State/StateWashing/StateWashing.h"
 
 StateManager::StateManager(Components* components, Scheduler* scheduler) {
     this->scheduler = scheduler;
@@ -43,15 +44,10 @@ void StateManager::switchState(){
                 newState = stateFactory(StateName::ExitingWashingArea);
                 break;
             case StateName::ExitingWashingArea:
-                newState = stateFactory(StateName::CarExited);
-                break;
-            case StateName::CarExited:
                 newState = stateFactory(StateName::Idle);
                 break;
             case StateName::Error:
             default:
-                // TODO: evaluate if the undefined/unknown/default state
-                //       should reset the CPU or switch to StateIdle
                 StateError* stateError = (StateError*) state;
                 newState = stateFactory(stateError->previousStateName);
                 break;
@@ -90,12 +86,10 @@ State* StateManager::stateFactory(StateName stateName) {
             return new StateEnteringWashingArea(carWashed,this->components, this->scheduler);
         case StateName::ReadyToWash:
             return new StateReadyToWash(carWashed, this->components, this->scheduler);
-        // case StateName::Washing:
-        //     return new StateWashing();
+        case StateName::Washing:
+            return new StateWashing(carWashed, this->components, this->scheduler);
         // case StateName::ExitingWashingArea:
         //     return new StateExitingWashingArea();
-        // case StateName::CarExited:
-        //     return new StateCarExited();
         case StateName::Error:
         default:
             return new StateError(carWashed,this->state->name());  
