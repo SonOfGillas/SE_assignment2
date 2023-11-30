@@ -7,6 +7,7 @@
 #include "State/StateReadyToWash/StateReadyToWash.h"
 #include "State/StateInitial/StateInitial.h"
 #include "State/StateWashing/StateWashing.h"
+#include "State/StateExitingWashingArea/StateExitingWashingArea.h"
 
 StateManager::StateManager(Components* components, Scheduler* scheduler) {
     this->scheduler = scheduler;
@@ -88,8 +89,8 @@ State* StateManager::stateFactory(StateName stateName) {
             return new StateReadyToWash(carWashed, this->components, this->scheduler);
         case StateName::Washing:
             return new StateWashing(carWashed, this->components, this->scheduler);
-        // case StateName::ExitingWashingArea:
-        //     return new StateExitingWashingArea();
+        case StateName::ExitingWashingArea:
+            return new StateExitingWashingArea(carWashed, this->components, this->scheduler);
         case StateName::Error:
         default:
             return new StateError(carWashed,this->state->name());  

@@ -10,8 +10,6 @@ String getStateNameString(StateName stateName){
             return "Welcome";
         case StateName::EnteringWashingArea:
             return "Entering Washing Area";
-        case StateName::CarExited:
-            return "Car Exited";
         case StateName::Error:
         default:
             return "Error";
