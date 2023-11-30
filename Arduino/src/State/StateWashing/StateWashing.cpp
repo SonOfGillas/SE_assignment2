@@ -1,7 +1,6 @@
 #include <Arduino.h>
 #include <Scheduler.h>
 #include <Config.h>
-#include "StateWashing.h"
 #include "Components/Components.h"
 #include "StateWashing.h"
 #include "Tasks/LcdCountdown/LcdCountdown.h"

@@ -5,12 +5,12 @@
 #include <LcdScreen.h>
 #include "CountdownListener.h"
 
-class LcdCoutndown: public Task {
+class LcdCountdown: public Task {
     private:
         LcdScreen* lcd;
         CountdownListener* handler;
     public:
-        LcdCoutndown(LcdScreen* lcd, CountdownListener* handler);
+        LcdCountdown(LcdScreen* lcd, CountdownListener* handler);
         void tick();
 };
 
