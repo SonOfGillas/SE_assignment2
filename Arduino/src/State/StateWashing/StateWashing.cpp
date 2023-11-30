@@ -4,6 +4,7 @@
 #include "Components/Components.h"
 #include "StateWashing.h"
 #include "Tasks/LcdCountdown/LcdCountdown.h"
+#include "Tasks/BlinkLed/BlinkLed.h"
 
 StateName StateWashing::name() {
     return StateName::ReadyToWash;
@@ -24,6 +25,11 @@ StateWashing::StateWashing(int carWashed, Components* components, Scheduler* sch
     Task* lcdCountdown = new LcdCountdown(components->userLcd, this);
     lcdCountdown->init(500);
     this->scheduler->addTask(lcdCountdown);
+
+    // blink L2
+    Task* blinkLed = new BlinkLed(components->l2);
+    blinkLed->init(500);
+    this->scheduler->addTask(blinkLed);
 }
 
 bool StateWashing::goNext() {
@@ -40,5 +46,7 @@ unsigned long StateWashing::getRemainingTime() {
 }
 
 StateWashing::~StateWashing() {
+    scheduler->removeLastTask(); // remove led blinker
     scheduler->removeLastTask(); // remove lcd countdown
+    this->components->l2->switchOff();
 }
