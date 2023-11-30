@@ -21,5 +21,5 @@ Components::Components() {
     this->carPresenceDetector = new Pir(PIN_PIR);   
     this->tempSensor = new AnalogTempSensor(PIN_TEMP_SENSOR);
 
-    while (this->carPresenceDetector->isCalibrationFinished() == false){};
+    //while (this->carPresenceDetector->isCalibrationFinished() == false){};
 }

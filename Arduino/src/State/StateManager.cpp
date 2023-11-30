@@ -5,12 +5,13 @@
 #include "State/StateEnteringWashingArea/StateEnteringWashingArea.h"
 #include "State/StateError/StateError.h"
 #include "State/StateReadyToWash/StateReadyToWash.h"
+#include "State/StateInitial/StateInitial.h"
 
 StateManager::StateManager(Components* components, Scheduler* scheduler) {
     this->scheduler = scheduler;
     this->components = components;
     this->scheduler = scheduler;
-    this->state = new StateIdle(0,scheduler);
+    this->state = new StateInitial(0);
 }
 
 void StateManager::switchState(){
@@ -23,7 +24,7 @@ void StateManager::switchState(){
         StateName currentState = this->state->name();
         State* newState;
         switch (currentState) {
-            case StateName::CarExited:
+            case StateName::Initial:
                 newState = stateFactory(StateName::Idle);
                 break;
             case StateName::Idle:
@@ -43,6 +44,9 @@ void StateManager::switchState(){
                 break;
             case StateName::ExitingWashingArea:
                 newState = stateFactory(StateName::CarExited);
+                break;
+            case StateName::CarExited:
+                newState = stateFactory(StateName::Idle);
                 break;
             case StateName::Error:
             default:
@@ -66,7 +70,6 @@ void StateManager::setError(bool error){
             stateError->setMaintenanceDone();
         }
     }
-
 }
 
 StateName StateManager::getCurrentState(){
@@ -77,6 +80,8 @@ StateName StateManager::getCurrentState(){
 State* StateManager::stateFactory(StateName stateName) {
     int carWashed = this->state->getCarWashed();
     switch (stateName) {
+        case StateName::Initial:
+            return new StateInitial(carWashed);
         case StateName::Idle:
             return new StateIdle(carWashed,this->scheduler);
         case StateName::Welcome:
