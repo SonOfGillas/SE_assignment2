@@ -27,7 +27,7 @@ void setup() {
     stateManagerTask->init(100);
     sched->addTask(stateManagerTask);
 
-    Task* diagnosticTask = new Diagnostic(stateManager,components->tempSensor);
+    Task* diagnosticTask = new Diagnostic(stateManager, components->getTempSensor());
     diagnosticTask->init(500);
     sched->addTask(diagnosticTask);
 }

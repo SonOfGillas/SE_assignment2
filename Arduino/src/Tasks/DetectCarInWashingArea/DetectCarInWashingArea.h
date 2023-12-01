@@ -2,7 +2,6 @@
 #define __TASK_DETECT_CAR_IN_WASHING_AREA__
 
 #include <Task.h>
-#include <Components/Components.h>
 #include <Sonar.h>
 #include "CarInWashingAreaListener.h"
 
@@ -13,7 +12,7 @@ class DetectCarInWashingArea : public Task {
         CarInWashingAreaListener* listener;
         bool isCarInWashingArea;
     public:
-        DetectCarInWashingArea(Components* components, CarInWashingAreaListener* listener);
+        DetectCarInWashingArea(Sonar* sonar, CarInWashingAreaListener* listener);
         void init(int period);
         void tick();
 };

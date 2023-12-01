@@ -10,8 +10,7 @@
 #include <AnalogTempSensor.h>
 
 class Components {
-    public:
-        Components();
+    private:
         Led* l1;
         Led* l2;
         Led* l3; 
@@ -21,6 +20,17 @@ class Components {
         LcdScreen* userLcd;
         Pir* carPresenceDetector;
         AnalogTempSensor* tempSensor;
+    public:
+        Components();
+        Led* getL1();
+        Led* getL2();
+        Led* getL3();
+        ButtonImpl* getStartButton();
+        Sonar* getCarDistanceDetector();
+        ServoMotorImpl* getGate();
+        LcdScreen* getUserLcd();
+        Pir* getCarOresenceDetector();
+        AnalogTempSensor* getTempSensor();
 };
 
 #endif

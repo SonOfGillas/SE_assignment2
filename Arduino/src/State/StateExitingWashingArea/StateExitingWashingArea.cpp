@@ -14,20 +14,20 @@ StateExitingWashingArea::StateExitingWashingArea(int carWashed, Components* comp
     this->scheduler = scheduler;
 
     // print to the screen
-    this->components->userLcd->clear();
-    this->components->userLcd->setCursor(0, 0);
-    this->components->userLcd->print("Washing complete");
-    this->components->userLcd->setCursor(0, 1);
-    this->components->userLcd->print("you can leave");
+    this->components->getUserLcd()->clear();
+    this->components->getUserLcd()->setCursor(0, 0);
+    this->components->getUserLcd()->print("Washing complete");
+    this->components->getUserLcd()->setCursor(0, 1);
+    this->components->getUserLcd()->print("you can leave");
     
     // switch on L3
-    this->components->l3->switchOn();
+    this->components->getL3()->switchOn();
 
     // open gate
-    this->components->gate->setPosition(90);
+    this->components->getGate()->setPosition(90);
 
     // distance < MAXDIST for N4 secs
-    Task* carExited = new DetectCarExitWashingArea(components->carDistanceDetector, this);
+    Task* carExited = new DetectCarExitWashingArea(components->getCarDistanceDetector(), this);
     carExited->init(100);
     this->scheduler->addTask(carExited);
 }
@@ -52,6 +52,6 @@ void StateExitingWashingArea::carExitedWashingArea(bool isCarExited) {
 
 StateExitingWashingArea::~StateExitingWashingArea() {
     this->scheduler->removeLastTask(); // remove distance detector
-    this->components->l3->switchOff();
-    this->components->gate->setPosition(0);
+    this->components->getL3()->switchOff();
+    this->components->getGate()->setPosition(0);
 }

@@ -23,3 +23,39 @@ Components::Components() {
 
     //while (this->carPresenceDetector->isCalibrationFinished() == false){};
 }
+
+Led* Components::getL1() {
+    return l1;
+}
+
+Led* Components::getL2() {
+    return l2;
+}
+
+Led* Components::getL3() {
+    return l3;
+}
+
+ButtonImpl* Components::getStartButton() {
+    return startButton;
+}
+
+Sonar* Components::getCarDistanceDetector() {
+    return carDistanceDetector;
+}
+
+ServoMotorImpl* Components::getGate() {
+    return gate;
+}
+
+LcdScreen* Components::getUserLcd() {
+    return userLcd;
+}
+
+Pir* Components::getCarOresenceDetector() {
+    return carPresenceDetector;
+}
+
+AnalogTempSensor* Components::getTempSensor() {
+    return tempSensor;
+}

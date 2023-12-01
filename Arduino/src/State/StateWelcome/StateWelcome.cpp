@@ -10,9 +10,9 @@ StateName StateWelcome::name() {
 StateWelcome::StateWelcome(int carWashed, Components* components):State(carWashed) {
     this->components = components;
     this->arrivalTime = millis();
-    this->components->userLcd->setCursor(0, 0); 
-    this->components->userLcd->print("Welcome");
-    this->components->l1->switchOn();
+    this->components->getUserLcd()->setCursor(0, 0); 
+    this->components->getUserLcd()->print("Welcome");
+    this->components->getL1()->switchOn();
 
 }
 
@@ -22,6 +22,6 @@ bool StateWelcome::goNext() {
 }
 
 StateWelcome::~StateWelcome() {
-    this->components->userLcd->clear();
-    this->components->l1->switchOff();
+    this->components->getUserLcd()->clear();
+    this->components->getL1()->switchOff();
 }

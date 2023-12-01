@@ -16,17 +16,17 @@ StateReadyToWash::StateReadyToWash(int carWashed, Components* components, Schedu
     this->isButtonPressed = false;
 
     // close gate
-    this->components->gate->setPosition(0);
+    this->components->getGate()->setPosition(0);
 
     // switch on L2
-    this->components->l2->switchOn();
+    this->components->getL2()->switchOn();
 
     // print to the screen
-    this->components->userLcd->clear();
-    this->components->userLcd->setCursor(0, 0); 
-    this->components->userLcd->print("Ready to wash");
+    this->components->getUserLcd()->clear();
+    this->components->getUserLcd()->setCursor(0, 0); 
+    this->components->getUserLcd()->print("Ready to wash");
     
-    Task* watchButton = new WatchButton(components, this);
+    Task* watchButton = new WatchButton(components->getStartButton(), this);
     watchButton->init(100);
     this->scheduler->addTask(watchButton);
 }

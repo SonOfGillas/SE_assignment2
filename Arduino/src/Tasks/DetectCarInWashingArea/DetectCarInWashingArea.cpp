@@ -4,8 +4,8 @@
 #include "DetectCarInWashingArea.h"
 #include "CarInWashingAreaListener.h"
 
-DetectCarInWashingArea::DetectCarInWashingArea(Components* components, CarInWashingAreaListener* listener) {
-    this->sonar = components->carDistanceDetector;
+DetectCarInWashingArea::DetectCarInWashingArea(Sonar* sonar, CarInWashingAreaListener* listener) {
+    this->sonar = sonar;
     this->listener = listener;
     this->isCarInWashingArea = false;
 }

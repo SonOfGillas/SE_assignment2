@@ -14,17 +14,17 @@ StateEnteringWashingArea::StateEnteringWashingArea(int carWashed,Components* com
     this->components = components;
     this->scheduler = scheduler;
 
-    this->components->userLcd->clear();
-    this->components->userLcd->setCursor(0, 0); 
-    this->components->userLcd->print("Procede to the Washing Area");
-    
+    this->components->getUserLcd()->clear();
+    this->components->getUserLcd()->setCursor(0, 0); 
+    this->components->getUserLcd()->print("Procede to the Washing Area");
+
     this->enteredTime = 0;
 
-    Task* detectCarInWashingArea = new DetectCarInWashingArea(this->components, this);
+    Task* detectCarInWashingArea = new DetectCarInWashingArea(this->components->getCarDistanceDetector(), this);
     detectCarInWashingArea->init(300);
     this->scheduler->addTask(detectCarInWashingArea);
 
-    Task* blinkTask = new BlinkLed(this->components->l2);
+    Task* blinkTask = new BlinkLed(this->components->getL2());
     blinkTask->init(100);
     this->scheduler->addTask(blinkTask);
 }

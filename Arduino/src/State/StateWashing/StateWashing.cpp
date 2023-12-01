@@ -17,17 +17,17 @@ StateWashing::StateWashing(int carWashed, Components* components, Scheduler* sch
     this->enteredTime = millis();
 
     // print to the screen
-    this->components->userLcd->clear();
-    this->components->userLcd->setCursor(0, 0); // col, line
-    this->components->userLcd->print("Washing");
+    this->components->getUserLcd()->clear();
+    this->components->getUserLcd()->setCursor(0, 0); // col, line
+    this->components->getUserLcd()->print("Washing");
     
     // display countdown N3
-    Task* lcdCountdown = new LcdCountdown(components->userLcd, this);
+    Task* lcdCountdown = new LcdCountdown(components->getUserLcd(), this);
     lcdCountdown->init(500);
     this->scheduler->addTask(lcdCountdown);
 
     // blink L2
-    Task* blinkLed = new BlinkLed(components->l2);
+    Task* blinkLed = new BlinkLed(components->getL2());
     blinkLed->init(500);
     this->scheduler->addTask(blinkLed);
 }
@@ -48,5 +48,5 @@ unsigned long StateWashing::getRemainingTime() {
 StateWashing::~StateWashing() {
     scheduler->removeLastTask(); // remove led blinker
     scheduler->removeLastTask(); // remove lcd countdown
-    this->components->l2->switchOff();
+    this->components->getL2()->switchOff();
 }

@@ -1,11 +1,10 @@
 #include "WatchButton.h"
-#include <Components/Components.h>
 #include <Button.h>
 #include "ButtonListener.h"
 
-WatchButton::WatchButton(Components* components, ButtonListener* listener) {
+WatchButton::WatchButton(Button* button, ButtonListener* listener) {
     this->listener = listener;
-    this->button = components->startButton;
+    this->button = button;
     this->isButtonPressed = false;
 }
 
