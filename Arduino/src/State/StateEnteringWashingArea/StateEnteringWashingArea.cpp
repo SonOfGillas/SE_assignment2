@@ -18,6 +18,9 @@ StateEnteringWashingArea::StateEnteringWashingArea(int carWashed,Components* com
     this->components->getUserLcd()->setCursor(0, 0); 
     this->components->getUserLcd()->print("Procede to the Washing Area");
 
+    this->components->getGate()->on();
+    this->components->getGate()->setPosition(180);
+
     this->enteredTime = 0;
 
     Task* detectCarInWashingArea = new DetectCarInWashingArea(this->components->getCarDistanceDetector(), this);
