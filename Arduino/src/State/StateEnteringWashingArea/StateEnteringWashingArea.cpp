@@ -21,7 +21,7 @@ StateEnteringWashingArea::StateEnteringWashingArea(int carWashed,Components* com
     this->components->getGate()->on();
     this->components->getGate()->setPosition(180);
 
-    this->enteredTime = 0;
+    this->lastTimeCarDetectedOutside = millis();
 
     Task* detectCarInWashingArea = new DetectCarInWashingArea(this->components->getCarDistanceDetector(), this);
     detectCarInWashingArea->init(300);
@@ -34,19 +34,18 @@ StateEnteringWashingArea::StateEnteringWashingArea(int carWashed,Components* com
 
 bool StateEnteringWashingArea::goNext(){
     long currentTime = millis();
-    return this->isCarInWashingArea? 
-        currentTime-(this->enteredTime) > (N2*1000) 
-        : false;
+    return this->isCarInWashingArea? currentTime-(this->lastTimeCarDetectedOutside) > (N2*1000) : false;
 }
 
 void StateEnteringWashingArea::carInWashingArea(bool isCarInWashingArea){
-    if(this->isCarInWashingArea == false && isCarInWashingArea == true){
-        this->enteredTime = millis();
+    if(isCarInWashingArea == false){
+        lastTimeCarDetectedOutside = millis(); 
     }
     this->isCarInWashingArea = isCarInWashingArea;
 }
 
 StateEnteringWashingArea::~StateEnteringWashingArea(){
+    this->components->getGate()->off();
     scheduler->removeLastTask(); // remove blink task
     scheduler->removeLastTask(); // remove detect car task
 }

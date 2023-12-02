@@ -10,7 +10,7 @@ class StateEnteringWashingArea: public State, public CarInWashingAreaListener {
         Components* components;
         Scheduler* scheduler;
         bool isCarInWashingArea;
-        long enteredTime;
+        long lastTimeCarDetectedOutside;
     public:
         StateEnteringWashingArea(int carWashed, Components* components, Scheduler* scheduler);
         ~StateEnteringWashingArea();
