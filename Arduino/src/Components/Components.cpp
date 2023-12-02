@@ -52,7 +52,7 @@ LcdScreen* Components::getUserLcd() {
     return userLcd;
 }
 
-Pir* Components::getCarOresenceDetector() {
+Pir* Components::getCarPresenceDetector() {
     return carPresenceDetector;
 }
 

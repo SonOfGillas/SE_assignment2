@@ -6,9 +6,11 @@
 class ButtonImpl: public Button {
     protected:
         int pin;
+        long lastPressedTime;
     public:
         ButtonImpl(int pin);
         bool isPressed();
+        bool isPressedDebounced();
 };
 
 #endif

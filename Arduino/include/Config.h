@@ -2,13 +2,13 @@
 #define __CONFIG__
 
 #define PIN_PIR 2
-#define PIN_L1 3
-#define PIN_L2 4
-#define PIN_L3 5
+#define PIN_L1 8
+#define PIN_L2 9
+#define PIN_L3 13
 #define PIN_BUTTON 6
-#define PIN_SONAR_TRIG 7
-#define PIN_SONAR_ECHO 8
-#define PIN_SERVO 9
+#define PIN_SONAR_TRIG 4
+#define PIN_SONAR_ECHO 3
+#define PIN_SERVO 5
 #define PIN_TEMP_SENSOR A0
 
 #define N1 5    //seconds in the check-in area

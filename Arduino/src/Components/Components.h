@@ -29,7 +29,7 @@ class Components {
         Sonar* getCarDistanceDetector();
         ServoMotorImpl* getGate();
         LcdScreen* getUserLcd();
-        Pir* getCarOresenceDetector();
+        Pir* getCarPresenceDetector();
         AnalogTempSensor* getTempSensor();
 };
 

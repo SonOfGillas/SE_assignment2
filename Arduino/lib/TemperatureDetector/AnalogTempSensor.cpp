@@ -1,23 +1,18 @@
 #include <Arduino.h>
 #include "AnalogTempSensor.h"
 
-/* Lm 35 */
+/* Lm 36 */
 AnalogTempSensor::AnalogTempSensor(int pin) {
     this->pin = pin;
     pinMode(pin,INPUT);
 }
 
 double AnalogTempSensor::getTemperature() {
-    int value = analogRead(A2);
+    int value = analogRead(this->pin);
 
     /* value : 1023 = value_in_mV : 5000 */
     /* value_in_mV = 5000/1023 * value */
-
-    int value_in_mV = 4.8876 * value;
-
     /* value_in_C = value_in_mV / 10 (since we have 10 mV => 1 °C ) */
 
-    double value_in_C = value_in_mV * 0.1;
-
-    return value_in_C;
+    return  ((value * 0.00488) - 0.5) / 0.01;;
 };
