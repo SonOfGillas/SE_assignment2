@@ -7,7 +7,7 @@
 #include "Tasks/BlinkLed/BlinkLed.h"
 
 StateName StateWashing::name() {
-    return StateName::ReadyToWash;
+    return StateName::Washing;
 }
 
 StateWashing::StateWashing(int carWashed, Components* components, Scheduler* scheduler): State(carWashed) {
