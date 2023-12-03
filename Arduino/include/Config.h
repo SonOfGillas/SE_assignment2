@@ -20,4 +20,7 @@
 #define MAXDIST 4  //maximum distance (meter) to detect a car
 #define MAXTEMP 30 //maximum temperature(Celsius) of the washing area
 
+#define GATE_OPEN 180
+#define GATE_CLOSED 0
+
 #endif

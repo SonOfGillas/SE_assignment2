@@ -20,7 +20,7 @@ StateReadyToWash::StateReadyToWash(int carWashed, Components* components, Schedu
     enableInterruptLib(PIN_BUTTON, this->buttonPressed, FALLING);
 
     // close gate
-    this->components->getGate()->setPosition(0);
+    this->components->getGate()->setPosition(GATE_CLOSED);
 
     // switch on L2
     this->components->getL2()->switchOn();

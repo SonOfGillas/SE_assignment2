@@ -6,12 +6,13 @@
 #include "Tasks/DetectCarExitingWashingArea/DetectCarExitWashingArea.h"
 
 StateName StateExitingWashingArea::name() {
-    return StateName::ReadyToWash;
+    return StateName::ExitingWashingArea;
 }
 
 StateExitingWashingArea::StateExitingWashingArea(int carWashed, Components* components, Scheduler* scheduler): State(carWashed) {
     this->components = components;
     this->scheduler = scheduler;
+    this->isCarExited = false;
 
     // print to the screen
     this->components->getUserLcd()->clear();
@@ -24,7 +25,7 @@ StateExitingWashingArea::StateExitingWashingArea(int carWashed, Components* comp
     this->components->getL3()->switchOn();
 
     // open gate
-    this->components->getGate()->setPosition(90);
+    this->components->getGate()->setPosition(GATE_OPEN);
 
     // distance < MAXDIST for N4 secs
     Task* carExited = new DetectCarExitWashingArea(components->getCarDistanceDetector(), this);
@@ -53,5 +54,5 @@ void StateExitingWashingArea::carExitedWashingArea(bool isCarExited) {
 StateExitingWashingArea::~StateExitingWashingArea() {
     this->scheduler->removeLastTask(); // remove distance detector
     this->components->getL3()->switchOff();
-    this->components->getGate()->setPosition(0);
+    this->components->getGate()->setPosition(GATE_CLOSED);
 }

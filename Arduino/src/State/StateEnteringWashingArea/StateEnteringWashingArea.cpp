@@ -18,7 +18,7 @@ StateEnteringWashingArea::StateEnteringWashingArea(int carWashed,Components* com
     this->components->getUserLcd()->setCursor(0, 0); 
     this->components->getUserLcd()->print("Procede to the Washing Area");
 
-    this->components->getGate()->setPosition(180);
+    this->components->getGate()->setPosition(GATE_OPEN);
 
     this->lastTimeCarDetectedOutside = millis();
 
