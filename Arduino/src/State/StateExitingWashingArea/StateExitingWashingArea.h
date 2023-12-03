@@ -16,9 +16,9 @@ class StateExitingWashingArea: public State, public CarExitedWashingAreaListener
     public:
         StateExitingWashingArea(int carWashed, Components* components, Scheduler* scheduler);
         ~StateExitingWashingArea();
-        StateName name() const volatile;
+        StateName name();
         void carExitedWashingArea(bool isCarOutside); // setter of isCarExited
-        bool goNext() volatile;
+        bool goNext();
 };
 
 #endif

@@ -7,7 +7,7 @@
 #include "Tasks/BlinkLed/BlinkLed.h"
 #include "Tasks/Sleep/Sleep.h"
 
-StateName StateExitingWashingArea::name()const volatile {
+StateName StateExitingWashingArea::name(){
     return StateName::ExitingWashingArea;
 }
 
@@ -37,9 +37,9 @@ StateExitingWashingArea::StateExitingWashingArea(int carWashed, Components* comp
   
 }
 
-bool StateExitingWashingArea::goNext() volatile {
+bool StateExitingWashingArea::goNext() {
     // distance > MAXDIST for N4 secs
-    return false;this->isCarExited;
+    return this->isCarExited;
 }
 
 void StateExitingWashingArea::carExitedWashingArea(bool isCarOutside) {
