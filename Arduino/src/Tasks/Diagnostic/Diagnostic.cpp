@@ -26,20 +26,14 @@ void Diagnostic::tick(){
         String msgContent = msg->getContent();
         if(msgContent == "RequestData"){
             String stateNameString = getStateNameString(curretState);
-
-            String openingTag = "{";
-            String carWashedTag = "\"CarWashed\":";
-            String carWashedData = "\""+String(stateManager->getCarWashed())+"\","; //TODO: get car washed
-            String washingMachineStateTag = "\"WashingMachineState\":";
-            String washingMachineStateData = "\""+stateNameString+"\",";
-            String temperatureTag = "\"Temperature\":";
-            String temperatureData = "\"" + String(temp, 1) + "C°\",";
-            String closingTag = "}";
-
-            //message exemple: "{\"CarWashed\":\"0\",\"WashingMachineState\":\"idle\",\"Temperature\":\"0\",}"
-            String msg = openingTag + carWashedTag + carWashedData + washingMachineStateTag + washingMachineStateData + temperatureTag + temperatureData + closingTag;
-            
-            MsgService.sendMsg(msg);
+            Serial.print("{\"CarWashed\":\"");
+            Serial.print(stateManager->getCarWashed());
+            Serial.print("\",\"WashingMachineState\":\"");
+            Serial.print(stateNameString);
+            Serial.print("\",\"Temperature\":\"");
+            Serial.print(temp);
+            Serial.println("\",}");
+            Serial.flush();
         } else if(msgContent == "MantainenceDone"){
             if(curretState == StateName::Error){
                 maxTempDetectedTime=0;

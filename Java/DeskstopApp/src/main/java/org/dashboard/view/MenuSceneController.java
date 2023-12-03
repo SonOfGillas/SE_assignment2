@@ -30,7 +30,7 @@ public class MenuSceneController extends AbstractController{
     private final UpdateView updateView = () -> {
         CarWashed.setText(this.dashboardManager.getCarWashed());
         WashingMachineState.setText(this.dashboardManager.getWashingMachineState());
-        Temperature.setText(this.dashboardManager.getTemperature());
+        Temperature.setText(this.dashboardManager.getTemperature() + "C°");
         errorConsole.setVisible(this.dashboardManager.errorDetected());
     };
     
