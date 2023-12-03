@@ -42,6 +42,7 @@ void StateManager::switchState(){
                 newState = stateFactory(StateName::Washing);
                 break;
             case StateName::Washing:
+                this->state->addCarWashed();
                 newState = stateFactory(StateName::ExitingWashingArea);
                 break;
             case StateName::ExitingWashingArea:
@@ -71,6 +72,10 @@ void StateManager::setError(bool error){
 
 StateName StateManager::getCurrentState(){
     return this->state->name();
+}
+
+int StateManager::getCarWashed(){
+    return this->state->getCarWashed();
 }
 
 /* this function need the current state for generate the StateError*/

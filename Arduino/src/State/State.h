@@ -33,6 +33,9 @@ class State {
         int getCarWashed(){
             return carWashed;
         }
+        void addCarWashed(){
+            this->carWashed++;
+        }
 };
 
 #endif

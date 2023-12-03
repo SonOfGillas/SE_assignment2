@@ -18,6 +18,7 @@ public:
     void switchState();
     void setError(bool error);
     StateName getCurrentState();
+    int getCarWashed();
 };
 
 #endif

@@ -46,7 +46,6 @@ void StateExitingWashingArea::carExitedWashingArea(bool isCarOutside) {
     if(isCarOutside){
         long currentTime = millis();
         if((currentTime - this->lastTimeCarDetectedInside) > (N4 * 1000)) {
-            Serial.println(String(currentTime)+" "+String(this->lastTimeCarDetectedInside));
             this->isCarExited = true;
         }
     } else {

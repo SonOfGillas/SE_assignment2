@@ -29,7 +29,7 @@ void Diagnostic::tick(){
 
             String openingTag = "{";
             String carWashedTag = "\"CarWashed\":";
-            String carWashedData = "\""+String(0)+"\","; //TODO: get car washed
+            String carWashedData = "\""+String(stateManager->getCarWashed())+"\","; //TODO: get car washed
             String washingMachineStateTag = "\"WashingMachineState\":";
             String washingMachineStateData = "\""+stateNameString+"\",";
             String temperatureTag = "\"Temperature\":";
