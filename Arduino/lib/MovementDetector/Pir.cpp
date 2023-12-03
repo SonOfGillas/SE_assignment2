@@ -8,7 +8,7 @@ Pir::Pir(int pin) {
 }
 
 bool Pir::isCalibrationFinished() {
-    long currentTime = millis();
+    unsigned long currentTime = millis();
     return currentTime-(this->initialCalibrationTime) > this->CALIBRATION_TIME_MILLI_SEC;
 }
 

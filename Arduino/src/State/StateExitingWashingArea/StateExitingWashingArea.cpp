@@ -4,8 +4,6 @@
 #include "StateExitingWashingArea.h"
 #include "Components/Components.h"
 #include "Tasks/DetectCarExitingWashingArea/DetectCarExitWashingArea.h"
-#include "Tasks/BlinkLed/BlinkLed.h"
-#include "Tasks/Sleep/Sleep.h"
 
 StateName StateExitingWashingArea::name(){
     return StateName::ExitingWashingArea;
@@ -44,7 +42,7 @@ bool StateExitingWashingArea::goNext() {
 
 void StateExitingWashingArea::carExitedWashingArea(bool isCarOutside) {
     if(isCarOutside){
-        long currentTime = millis();
+        unsigned long currentTime = millis();
         if((currentTime - this->lastTimeCarDetectedInside) > (N4 * 1000)) {
             this->isCarExited = true;
         }
@@ -54,7 +52,7 @@ void StateExitingWashingArea::carExitedWashingArea(bool isCarOutside) {
 }
 
 StateExitingWashingArea::~StateExitingWashingArea() {
-   this->scheduler->removeLastTask(); // remove distance detector
-   this->components->getL3()->switchOff();
-   this->components->getGate()->setPosition(GATE_CLOSED);
+    this->scheduler->removeLastTask(); // remove distance detector
+    this->components->getL3()->switchOff();
+    this->components->getGate()->setPosition(GATE_CLOSED);
 }

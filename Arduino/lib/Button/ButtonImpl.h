@@ -6,7 +6,7 @@
 class ButtonImpl: public Button {
     protected:
         int pin;
-        long lastPressedTime;
+        unsigned long lastPressedTime;
     public:
         ButtonImpl(int pin);
         bool isPressed();

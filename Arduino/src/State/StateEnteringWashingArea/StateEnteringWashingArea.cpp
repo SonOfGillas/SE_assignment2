@@ -32,7 +32,7 @@ StateEnteringWashingArea::StateEnteringWashingArea(int carWashed,Components* com
 }
 
 bool StateEnteringWashingArea::goNext(){
-    long currentTime = millis();
+    unsigned long currentTime = millis();
     return this->isCarInWashingArea? currentTime-(this->lastTimeCarDetectedOutside) > (N2*1000) : false;
 }
 
