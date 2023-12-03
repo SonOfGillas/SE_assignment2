@@ -28,8 +28,8 @@ void Scheduler::schedule() {
 
 bool Scheduler::removeLastTask() {
      if (nTasks > 0) {
-            delete taskList[nTasks];
             nTasks--;
+            delete taskList[nTasks];
             return true;
         } else {
             return false;

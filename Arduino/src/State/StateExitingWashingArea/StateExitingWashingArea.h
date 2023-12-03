@@ -11,14 +11,14 @@ class StateExitingWashingArea: public State, public CarExitedWashingAreaListener
     private:
         Scheduler* scheduler;
         Components* components;
-        unsigned long time;
+        long lastTimeCarDetectedInside;
         bool isCarExited;
     public:
         StateExitingWashingArea(int carWashed, Components* components, Scheduler* scheduler);
         ~StateExitingWashingArea();
-        StateName name();
-        void carExitedWashingArea(bool isCarExited); // setter of isCarExited
-        bool goNext();
+        StateName name() const volatile;
+        void carExitedWashingArea(bool isCarOutside); // setter of isCarExited
+        bool goNext() volatile;
 };
 
 #endif

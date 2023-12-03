@@ -4,8 +4,10 @@
 #include "StateExitingWashingArea.h"
 #include "Components/Components.h"
 #include "Tasks/DetectCarExitingWashingArea/DetectCarExitWashingArea.h"
+#include "Tasks/BlinkLed/BlinkLed.h"
+#include "Tasks/Sleep/Sleep.h"
 
-StateName StateExitingWashingArea::name() {
+StateName StateExitingWashingArea::name()const volatile {
     return StateName::ExitingWashingArea;
 }
 
@@ -13,6 +15,7 @@ StateExitingWashingArea::StateExitingWashingArea(int carWashed, Components* comp
     this->components = components;
     this->scheduler = scheduler;
     this->isCarExited = false;
+    this->lastTimeCarDetectedInside = millis();
 
     // print to the screen
     this->components->getUserLcd()->clear();
@@ -27,32 +30,32 @@ StateExitingWashingArea::StateExitingWashingArea(int carWashed, Components* comp
     // open gate
     this->components->getGate()->setPosition(GATE_OPEN);
 
-    // distance < MAXDIST for N4 secs
+    
     Task* carExited = new DetectCarExitWashingArea(components->getCarDistanceDetector(), this);
-    carExited->init(100);
+    carExited->init(500);
     this->scheduler->addTask(carExited);
+  
 }
 
-bool StateExitingWashingArea::goNext() {
-    return this->isCarExited;
+bool StateExitingWashingArea::goNext() volatile {
+    // distance > MAXDIST for N4 secs
+    return false;this->isCarExited;
 }
 
-void StateExitingWashingArea::carExitedWashingArea(bool isCarExited) {
-    if(isCarExited) {
-        if(this->time == 0) {
-            time = millis();
-        } else if((millis() - this->time) > (N4 * 1000)) {
+void StateExitingWashingArea::carExitedWashingArea(bool isCarOutside) {
+    if(isCarOutside){
+        long currentTime = millis();
+        if((currentTime - this->lastTimeCarDetectedInside) > (N4 * 1000)) {
+            Serial.println(String(currentTime)+" "+String(this->lastTimeCarDetectedInside));
             this->isCarExited = true;
         }
     } else {
-        // reset if previously set
-        this->isCarExited = false;
-        this->time = 0;
+        this->lastTimeCarDetectedInside = millis();
     }
 }
 
 StateExitingWashingArea::~StateExitingWashingArea() {
-    this->scheduler->removeLastTask(); // remove distance detector
-    this->components->getL3()->switchOff();
-    this->components->getGate()->setPosition(GATE_CLOSED);
+   this->scheduler->removeLastTask(); // remove distance detector
+   this->components->getL3()->switchOff();
+   this->components->getGate()->setPosition(GATE_CLOSED);
 }

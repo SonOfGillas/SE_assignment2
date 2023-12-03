@@ -13,8 +13,9 @@
 
 #define N1 5    //seconds in the check-in area
 #define N2 3    //seconds in the washing area
-#define N3 10   // washing time in seconds
-#define N4 5    //seconds maximum temperature is allowed
+#define N3 10   //washing time in seconds
+#define N4 5    //seconds before the gate closes after the car has left the washing area
+#define N5 5    //seconds in the check-out area
 
 #define MINDIST 1  //minimum distance(Meter) to detect a car in the washing area
 #define MAXDIST 4  //maximum distance (meter) to detect a car
