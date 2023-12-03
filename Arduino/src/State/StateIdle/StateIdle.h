@@ -2,6 +2,7 @@
 #define __STATE_IDLE__
 
 #include <Scheduler.h>
+#include <EnableInterruptLib.h>
 #include "../State.h"
 
 extern bool isWakeup;

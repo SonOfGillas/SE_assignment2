@@ -4,19 +4,21 @@
 #include <Scheduler.h>
 #include "State/State.h"
 #include "Components/Components.h"
-#include "Tasks/WatchButton/WatchButton.h"
-#include "Tasks/WatchButton/ButtonListener.h"
+#include "EnableInterruptLib.h"
 
-class StateReadyToWash: public State, public ButtonListener {
+extern bool isButtonPressed;
+
+class StateReadyToWash: public State {
     private:
         Components* components;
         Scheduler* scheduler;
-        bool isButtonPressed;
+        static void buttonPressed(){
+            isButtonPressed = true;
+        };
     public:
         StateReadyToWash(int carWashed, Components* components, Scheduler* scheduler);
         ~StateReadyToWash();
         StateName name();
-        void buttonPressed(bool isButtonPressed);
         bool goNext();
 };
 
