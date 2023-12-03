@@ -16,7 +16,7 @@ bool ButtonImpl::isPressed() {
 
 bool ButtonImpl::isPressedDebounced() {
     if(digitalRead(pin) == LOW){
-        long now = millis();
+        unsigned long now = millis();
         if(now - lastPressedTime > DEBOUNCE_TIME){
             lastPressedTime = millis();
             return true;

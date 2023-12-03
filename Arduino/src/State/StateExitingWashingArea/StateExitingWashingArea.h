@@ -11,7 +11,7 @@ class StateExitingWashingArea: public State, public CarExitedWashingAreaListener
     private:
         Scheduler* scheduler;
         Components* components;
-        long lastTimeCarDetectedInside;
+        unsigned long lastTimeCarDetectedInside;
         bool isCarExited;
     public:
         StateExitingWashingArea(int carWashed, Components* components, Scheduler* scheduler);

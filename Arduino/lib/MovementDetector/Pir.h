@@ -5,8 +5,8 @@
 
 class Pir: public MovementDetector {        
     protected:
-        int CALIBRATION_TIME_MILLI_SEC = 10000;
-        long initialCalibrationTime;
+        unsigned int CALIBRATION_TIME_MILLI_SEC = 10000;
+        unsigned long initialCalibrationTime;
         int pin;
     public:
         Pir(int pin);
