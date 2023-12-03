@@ -1,3 +1,7 @@
+// AUTHORS:
+// Riccardo Gardenghi 0000970796
+// Lorenzo Debertolis 0001091222
+
 #include <Arduino.h>
 #include <Wire.h>
 #include <Scheduler.h>
