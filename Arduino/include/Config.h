@@ -13,7 +13,7 @@
 
 #define N1 5    //seconds in the check-in area
 #define N2 3    //seconds in the washing area
-#define N3 20   //washing time in seconds
+#define N3 10   //washing time in seconds
 #define N4 5    //seconds before the gate closes after the car has left the washing area
 #define N5 5    //seconds in the check-out area
 
